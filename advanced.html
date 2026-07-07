@@ -201,7 +201,7 @@
     <div class="exam-cta-block">
       <h2>Ready to Take the Exam?</h2>
       <p>25 questions · 60-minute time limit · Score 70% or higher to earn your Advanced Certificate</p>
-      <a class="btn-start-exam" href="#" id="showNameBtn">Start the Advanced Exam &nbsp;→</a>
+      <button class="btn-start-exam" id="showNameBtn">Start the Advanced Exam &nbsp;→</button>
     </div>
 
     <!-- NAME INPUT (shown when CTA clicked) -->
@@ -471,7 +471,7 @@ function downloadCertificate(){
 }
 
 // Wire up events
-document.getElementById('showNameBtn').addEventListener('click',e=>{e.preventDefault();showNameSection();});
+document.getElementById('showNameBtn').addEventListener('click',function(){showNameSection();});
 document.getElementById('candidateName').addEventListener('keydown',e=>{if(e.key==='Enter')startExam();});
 document.getElementById('beginBtn').addEventListener('click',startExam);
 document.getElementById('certBtn').addEventListener('click',downloadCertificate);
