@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basic Course Lesson — Iron Condors Academy</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#0B1220;--slate:#32405C;--body:#4A5468;--mute:#6B7280;
+    --line:#E4E0D3;--panel:#F4F1E8;--panel2:#FAF8F3;
+    --teal:#0F2A6A;--tealb:#1E3F8F;--tealx:#E8EAF3;
+    --gold:#B8923E;--goldl:#E0C583;--goldx:#FBF3DE;
+    --green:#0D7A4C;--greenx:#DEF3E7;--rose:#B0264A;--rosex:#FBE4EA;
+    --radius:14px;--shadow:0 10px 32px rgba(15,26,42,.12);
+    --serif:'Bodoni Moda',Georgia,serif;--accent:'Cormorant',Georgia,serif;
+  }
+  *{box-sizing:border-box}html,body{margin:0;padding:0}
+  body{font-family:'Jost',-apple-system,sans-serif;color:var(--ink);background:var(--panel2);
+    background-image:radial-gradient(circle at 12% 8%,rgba(184,146,62,.07),transparent 42%),radial-gradient(circle at 92% 4%,rgba(15,42,106,.06),transparent 38%);
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px 80px}
+  /* HEADER */
+  .site-header{background:linear-gradient(160deg,#0A1A45,#0F2A6A 55%,#0C2258);border-bottom:2px solid var(--gold);box-shadow:0 4px 24px rgba(10,20,50,.35);position:relative}
+  .site-header::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .site-header-inner{max-width:860px;margin:0 auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+  .brand-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 32% 28%,#1E3F8F,#0A1A45 70%);color:var(--goldl);font-weight:700;font-family:var(--serif);font-size:1rem;box-shadow:0 0 0 2px var(--gold),0 0 0 4px rgba(184,146,62,.2)}
+  .brand-text strong{display:block;font-family:var(--serif);font-size:1.05rem;color:#fff}
+  .brand-text span{display:block;color:var(--goldl);font-size:.72rem;font-family:var(--accent);font-style:italic}
+  .header-links{display:flex;gap:6px}
+  .header-link{font-size:.78rem;font-weight:600;color:rgba(255,255,255,.65);text-decoration:none;padding:6px 11px;border-radius:7px;border:1px solid transparent;transition:.15s}
+  .header-link:hover{background:rgba(224,197,131,.12);border-color:rgba(224,197,131,.35);color:var(--goldl)}
+  /* HERO */
+  .lesson-hero{padding:40px 0 28px;border-bottom:1px solid var(--line);margin-bottom:36px}
+  .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.74rem;font-weight:600;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+  .breadcrumb a{color:var(--mute);text-decoration:none}.breadcrumb a:hover{color:var(--teal)}
+  .breadcrumb-sep{color:var(--line)}
+  .level-badge{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 14px;border-radius:999px;background:var(--greenx);color:var(--green);border:1px solid rgba(13,122,76,.2);margin-bottom:12px}
+  .lesson-hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.8rem);font-weight:700;color:var(--ink);margin:0 0 12px;line-height:1.1}
+  .lesson-hero .sub{color:var(--body);font-size:1rem;max-width:60ch;line-height:1.7;margin:0}
+  /* OBJECTIVES BOX */
+  .obj-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;margin-bottom:36px;position:relative;overflow:hidden}
+  .obj-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+  .obj-box h2{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);margin:0 0 14px}
+  .obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+  .obj-item{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--body);line-height:1.5}
+  .obj-num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-size:.76rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.05em}
+  .obj-text strong{display:block;color:var(--ink);font-weight:600;font-size:.9rem}
+  /* MODULE HEADER */
+  .module-header{display:flex;align-items:center;gap:14px;margin:40px 0 20px;padding:18px 22px;background:linear-gradient(135deg,#0A1A45,#0F2A6A);border-radius:var(--radius);color:#fff}
+  .module-num{width:44px;height:44px;border-radius:50%;background:rgba(224,197,131,.2);border:2px solid var(--goldl);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--goldl);flex:none}
+  .module-title{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:#fff;margin:0 0 2px}
+  .module-sub{font-size:.82rem;color:rgba(255,255,255,.65);margin:0}
+  /* LESSON CARD */
+  .lesson-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;margin-bottom:16px;position:relative;overflow:hidden}
+  .lesson-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));opacity:.5}
+  .lesson-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .lesson-label::before{content:'';width:18px;height:1px;background:var(--mute)}
+  .lesson-card h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--ink);margin:0 0 14px;line-height:1.15}
+  .lesson-card p{font-size:.95rem;color:var(--body);line-height:1.7;margin:0 0 12px}
+  .lesson-card p:last-child{margin-bottom:0}
+  /* TWO COLUMN SPLIT */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .col-card{border-radius:10px;padding:16px 18px}
+  .col-card.green{background:var(--greenx);border:1px solid rgba(13,122,76,.2)}
+  .col-card.blue{background:var(--tealx);border:1px solid rgba(15,42,106,.2)}
+  .col-card.gold{background:var(--goldx);border:1px solid rgba(184,146,62,.2)}
+  .col-card.rose{background:var(--rosex);border:1px solid rgba(176,38,74,.2)}
+  .col-title{font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .col-card.green .col-title{color:var(--green)}
+  .col-card.blue .col-title{color:var(--teal)}
+  .col-card.gold .col-title{color:#7a5a10}
+  .col-card.rose .col-title{color:var(--rose)}
+  .col-card ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .col-card li{font-size:.88rem;color:var(--body);line-height:1.5;display:flex;gap:8px}
+  .col-card li::before{content:'•';flex:none;font-weight:700;margin-top:.05em}
+  .col-card.green li::before{color:var(--green)}
+  .col-card.blue li::before{color:var(--teal)}
+  .col-card.gold li::before{color:var(--gold)}
+  .col-card.rose li::before{color:var(--rose)}
+  /* KEY IDEA */
+  .key-idea{background:var(--goldx);border:1px solid rgba(184,146,62,.25);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:.9rem;color:var(--slate);line-height:1.6}
+  .key-idea strong{color:var(--ink)}
+  /* DEFINITION LIST */
+  .deflist{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
+  .deflist li{display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:baseline;font-size:.93rem;padding:10px 0;border-bottom:1px solid var(--line)}
+  .deflist li:last-child{border-bottom:none}
+  .deflist .term{font-weight:700;color:var(--ink)}
+  .deflist .def{color:var(--body);line-height:1.55}
+  /* FOUR LEGS TABLE */
+  .legs-table{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(15,23,42,.06)}
+  .legs-table th{background:var(--teal);color:#fff;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;text-align:left}
+  .legs-table td{padding:11px 14px;font-size:.9rem;border-bottom:1px solid var(--line);background:#fff;color:var(--body)}
+  .legs-table td:first-child{font-weight:700;color:var(--ink)}
+  .legs-table tr:last-child td{border-bottom:none}
+  .legs-table tr:nth-child(even) td{background:var(--panel2)}
+  /* PAYOFF VISUAL */
+  .payoff-wrap{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin:14px 0}
+  .payoff-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:14px;text-align:center}
+  .payoff-zones{display:flex;align-items:stretch;gap:2px;height:80px;border-radius:8px;overflow:hidden;margin-bottom:10px}
+  .pz{display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:.7rem;font-weight:700;text-align:center;line-height:1.3;padding:4px}
+  .pz.loss{background:var(--rosex);color:var(--rose);flex:2}
+  .pz.ramp{background:rgba(184,146,62,.12);color:#7a5a10;flex:1}
+  .pz.profit{background:var(--greenx);color:var(--green);flex:3}
+  .pz-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--mute);font-weight:600;padding:0 2px}
+  /* MATH CARDS */
+  .math-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:14px 0}
+  .math-card{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .math-card .mc-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+  .math-card .mc-formula{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:6px;font-family:Georgia,serif}
+  .math-card .mc-example{font-size:.82rem;color:var(--teal);font-weight:600}
+  /* CHECK / CROSS LIST */
+  .check-list{list-style:none;margin:10px 0;padding:0;display:grid;gap:8px}
+  .check-list li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--body);line-height:1.55}
+  .check-list li.check::before{content:'✓';color:var(--green);font-weight:700;flex:none;margin-top:.05em}
+  .check-list li.cross::before{content:'✕';color:var(--rose);font-weight:700;flex:none;margin-top:.05em}
+  /* QUICK REF GLOSSARY */
+  .gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+  .gloss-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .gloss-term{font-weight:700;font-size:.88rem;color:var(--ink);margin-bottom:4px}
+  .gloss-def{font-size:.83rem;color:var(--body);line-height:1.5}
+  /* EXAM CTA */
+  .exam-cta{background:linear-gradient(135deg,#0A1A45,#0F2A6A);border-radius:var(--radius);padding:36px 28px;text-align:center;margin:48px 0 0;position:relative;overflow:hidden}
+  .exam-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .exam-cta h2{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:#fff;margin:0 0 8px}
+  .exam-cta p{color:rgba(255,255,255,.7);font-size:.95rem;margin:0 0 24px;line-height:1.6}
+  .btn-exam{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--goldl),var(--gold));color:#0A1A45;font-family:var(--serif);font-size:1.1rem;font-weight:700;padding:16px 36px;border-radius:999px;text-decoration:none;box-shadow:0 6px 24px rgba(184,146,62,.4);transition:.2s;letter-spacing:.02em}
+  .btn-exam:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,146,62,.5)}
+  /* FOOTER */
+  footer{margin-top:48px;text-align:center;background:linear-gradient(160deg,#0C2258,#0A1A45);color:#C9CEDD;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;padding:24px 16px 28px;border-radius:var(--radius);position:relative;overflow:hidden}
+  footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  footer a{color:var(--goldl);text-decoration:none}
+  @media(max-width:600px){.two-col{grid-template-columns:1fr}.deflist li{grid-template-columns:1fr}.deflist .term{margin-bottom:2px}.math-grid{grid-template-columns:1fr 1fr}.obj-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">IC</span>
+      <span class="brand-text"><strong>Iron Condors Academy</strong><span>Defined-risk options certification</span></span>
+    </a>
+    <div class="header-links">
+      <a class="header-link" href="/basic">← Course Overview</a>
+      <a class="header-link" href="/">All Courses</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lesson-hero">
+    <div class="breadcrumb">
+      <a href="/">Home</a><span class="breadcrumb-sep">›</span>
+      <a href="/basic">Basic Course</a><span class="breadcrumb-sep">›</span>
+      <span>Lesson</span>
+    </div>
+    <span class="level-badge">Course 1 of 3 · Basic</span>
+    <h1>Iron Condors — Basic Course</h1>
+    <p class="sub">Foundations of a neutral, defined-risk options strategy. Work through every module, then take the exam at the bottom of the page to earn your certificate.</p>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div class="obj-box">
+    <h2>By the End of This Course You Will Be Able To</h2>
+    <div class="obj-grid">
+      <div class="obj-item"><span class="obj-num">1</span><div class="obj-text"><strong>Speak the language</strong>Define calls, puts, strike, premium, and expiration with confidence.</div></div>
+      <div class="obj-item"><span class="obj-num">2</span><div class="obj-text"><strong>Read moneyness</strong>Tell in-, at-, and out-of-the-money apart and know why it matters.</div></div>
+      <div class="obj-item"><span class="obj-num">3</span><div class="obj-text"><strong>Understand spreads</strong>Explain vertical spreads and the difference between credit and debit.</div></div>
+      <div class="obj-item"><span class="obj-num">4</span><div class="obj-text"><strong>Build a condor</strong>Assemble the four legs of an Iron Condor in the correct strike order.</div></div>
+      <div class="obj-item"><span class="obj-num">5</span><div class="obj-text"><strong>Do the math</strong>Calculate max profit, max loss, and both break-even points.</div></div>
+      <div class="obj-item"><span class="obj-num">6</span><div class="obj-text"><strong>Know the setup</strong>Identify the market conditions where an Iron Condor makes sense.</div></div>
+    </div>
+  </div>
+
+  <!-- MODULE 1 -->
+  <div class="module-header">
+    <div class="module-num">1</div>
+    <div>
+      <p class="module-title">Options Fundamentals</p>
+      <p class="module-sub">The two building blocks every strategy is made of: calls and puts.</p>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 1 · Lesson 1</div>
+    <h3>What Is an Option?</h3>
+    <p>An option is a contract that gives the buyer the <strong>right — but not the obligation</strong> — to buy or sell 100 shares of a stock at a set price before a set date. The seller takes on the obligation in exchange for a payment called the <strong>premium</strong>.</p>
+    <div class="two-col">
+      <div class="col-card blue">
+        <div class="col-title">Call Option</div>
+        <ul>
+          <li>The right to <strong>BUY</strong> at the strike price</li>
+          <li>Buyers profit when the stock <strong>rises</strong> above the strike</li>
+          <li>Think: bullish — betting the price goes up</li>
+          <li>Max loss for the buyer is the premium paid</li>
+        </ul>
+      </div>
+      <div class="col-card green">
+        <div class="col-title">Put Option</div>
+        <ul>
+          <li>The right to <strong>SELL</strong> at the strike price</li>
+          <li>Buyers profit when the stock <strong>falls</strong> below the strike</li>
+          <li>Think: bearish — betting the price goes down</li>
+          <li>Max loss for the buyer is the premium paid</li>
+        </ul>
+      </div>
+    </div>
+    <div class="key-idea"><strong>Key idea:</strong> An Iron Condor is built by <em>selling</em> options to collect premium — so understanding both sides is essential.</div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 1 · Lesson 2</div>
+    <h3>The Terms You Must Know</h3>
+    <ul class="deflist">
+      <li><span class="term">Strike Price</span><span class="def">The agreed price at which the option can be exercised.</span></li>
+      <li><span class="term">Expiration</span><span class="def">The date the contract ends. Iron Condors use one shared expiry across all four legs.</span></li>
+      <li><span class="term">Premium</span><span class="def">The price of the option — what the buyer pays and the seller collects.</span></li>
+      <li><span class="term">In / At / Out of the Money</span><span class="def">Where the stock sits vs. the strike. Sold condor legs always start out-of-the-money.</span></li>
+      <li><span class="term">Time Decay (Theta)</span><span class="def">Options lose value as expiration nears — a tailwind for sellers and a headwind for buyers.</span></li>
+      <li><span class="term">Implied Volatility (IV)</span><span class="def">The market's expectation of movement. Higher IV means richer premium for the seller to collect.</span></li>
+    </ul>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="module-header">
+    <div class="module-num">2</div>
+    <div>
+      <p class="module-title">Spreads: The Building Blocks</p>
+      <p class="module-sub">Combine two options into one position to define your risk and reward.</p>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 2 · Lesson 1</div>
+    <h3>Vertical Spreads: Credit vs. Debit</h3>
+    <p>A vertical spread buys one option and sells another of the same type and expiration at different strikes. This caps both your profit and your loss. <strong>An Iron Condor is simply two credit spreads combined.</strong></p>
+    <div class="two-col">
+      <div class="col-card green">
+        <div class="col-title">Credit Spread</div>
+        <ul>
+          <li>You <strong>collect</strong> premium up front</li>
+          <li>Sell the nearer option, buy a cheaper one further out</li>
+          <li>Profits from time decay and falling volatility</li>
+          <li>Best when IV is elevated — sell expensive options</li>
+          <li><strong>The engine of the Iron Condor</strong></li>
+        </ul>
+      </div>
+      <div class="col-card rose">
+        <div class="col-title">Debit Spread</div>
+        <ul>
+          <li>You <strong>pay</strong> premium up front</li>
+          <li>Buy the nearer option, sell a cheaper one further out</li>
+          <li>Profits from a directional move in your favor</li>
+          <li>Best when IV is low — options are cheaper to buy</li>
+          <li>Not used to build a condor — shown for contrast</li>
+        </ul>
+      </div>
+    </div>
+    <div class="key-idea"><strong>Remember:</strong> Iron Condor = a <em>put credit spread</em> below the price + a <em>call credit spread</em> above it.</div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="module-header">
+    <div class="module-num">3</div>
+    <div>
+      <p class="module-title">The Iron Condor</p>
+      <p class="module-sub">Four legs, one range, defined risk — assembled and explained.</p>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 3 · Lesson 1</div>
+    <h3>What Is an Iron Condor?</h3>
+    <p>An Iron Condor is a <strong>neutral, defined-risk strategy</strong>. You sell an out-of-the-money put spread and an out-of-the-money call spread on the same stock and expiration, collecting a net credit.</p>
+    <div class="math-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">
+      <div class="math-card"><div class="mc-label">Market View</div><div class="mc-formula">Sideways / range-bound</div><div class="mc-example">No strong direction expected</div></div>
+      <div class="math-card"><div class="mc-label">You Collect</div><div class="mc-formula">A net credit up front</div><div class="mc-example">Kept in full if price stays in range</div></div>
+      <div class="math-card"><div class="mc-label">Your Risk</div><div class="mc-formula">Capped and known</div><div class="mc-example">Set before you enter the trade</div></div>
+    </div>
+    <div class="key-idea"><strong>Why the name:</strong> The payoff chart's flat top and two wings resemble a condor's wingspan — hence "Iron Condor."</div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 3 · Lesson 2</div>
+    <h3>The Four Legs, In Order</h3>
+    <p>From lowest strike to highest, an Iron Condor is always built the same way. Sell the <em>inner</em> strikes to collect credit; buy the <em>outer</em> strikes to cap your risk.</p>
+    <table class="legs-table">
+      <thead><tr><th>#</th><th>Leg</th><th>Action</th><th>Role</th><th>Example Strike</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Long Put</td><td>BUY</td><td>Lower wing — caps downside risk</td><td>$90</td></tr>
+        <tr><td>2</td><td>Short Put</td><td>SELL</td><td>Bottom of your range — collects premium</td><td>$95</td></tr>
+        <tr><td>3</td><td>Short Call</td><td>SELL</td><td>Top of your range — collects premium</td><td>$105</td></tr>
+        <tr><td>4</td><td>Long Call</td><td>BUY</td><td>Upper wing — caps upside risk</td><td>$110</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 3 · Lesson 3</div>
+    <h3>The Payoff: Profit Zone &amp; Wings</h3>
+    <p>This is what happens at expiration for a condor with a <strong>$2.00 net credit</strong> and <strong>$5 wings</strong> on a $100 stock (short strikes at $95 and $105):</p>
+    <div class="payoff-wrap">
+      <div class="payoff-label">Profit / Loss at Expiration — Stock Price Along the Bottom</div>
+      <div class="payoff-zones">
+        <div class="pz loss">MAX LOSS<br>−$300</div>
+        <div class="pz ramp">Ramp<br>up</div>
+        <div class="pz profit">PROFIT ZONE<br>$95–$105<br>Keep full +$200</div>
+        <div class="pz ramp">Ramp<br>down</div>
+        <div class="pz loss">MAX LOSS<br>−$300</div>
+      </div>
+      <div class="pz-labels">
+        <span>$85 · $90</span>
+        <span>$93 B/E</span>
+        <span>$95 – $105 (profit zone)</span>
+        <span>$107 B/E</span>
+        <span>$110 · $115</span>
+      </div>
+    </div>
+    <div class="math-grid">
+      <div class="math-card"><div class="mc-label">Profit Zone</div><div class="mc-formula">$95 – $105</div><div class="mc-example">Price stays between short strikes → keep full credit</div></div>
+      <div class="math-card"><div class="mc-label">Break-Even</div><div class="mc-formula">$93 and $107</div><div class="mc-example">Credit exactly offsets the loss — finish flat</div></div>
+      <div class="math-card"><div class="mc-label">Loss Zone</div><div class="mc-formula">Below $90 / above $110</div><div class="mc-example">Big move past a wing → capped maximum loss</div></div>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 3 · Lesson 4</div>
+    <h3>The Math: Profit, Loss &amp; Break-Evens</h3>
+    <p>A worked example on a <strong>$100 stock</strong>. One contract controls 100 shares. Wing width = $5.</p>
+    <div class="two-col">
+      <div class="col-card blue">
+        <div class="col-title">The Setup</div>
+        <ul>
+          <li>Sell $95 put → collect $0.90</li>
+          <li>Buy $90 put → pay $0.30</li>
+          <li>Sell $105 call → collect $0.90</li>
+          <li>Buy $110 call → pay $0.30</li>
+          <li><strong>Net credit: $1.20</strong></li>
+        </ul>
+      </div>
+      <div class="col-card green">
+        <div class="col-title">The Results</div>
+        <ul>
+          <li><strong>Max Profit:</strong> $120 (credit × 100)</li>
+          <li><strong>Max Loss:</strong> $380 (($5 − $1.20) × 100)</li>
+          <li><strong>Lower B/E:</strong> $93.80 ($95 − $1.20)</li>
+          <li><strong>Upper B/E:</strong> $106.20 ($105 + $1.20)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="math-grid">
+      <div class="math-card"><div class="mc-label">Max Profit Formula</div><div class="mc-formula">Credit × 100</div><div class="mc-example">$1.20 × 100 = $120</div></div>
+      <div class="math-card"><div class="mc-label">Max Loss Formula</div><div class="mc-formula">(Width − Credit) × 100</div><div class="mc-example">($5.00 − $1.20) × 100 = $380</div></div>
+      <div class="math-card"><div class="mc-label">Break-Even Formula</div><div class="mc-formula">Short Strike ± Net Credit</div><div class="mc-example">$95 − $1.20 = $93.80 &nbsp;/&nbsp; $105 + $1.20 = $106.20</div></div>
+    </div>
+    <div class="key-idea">Risk-to-reward here is about 3-to-1 — a common trade-off for a high-probability, range-bound strategy.</div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 3 · Lesson 5</div>
+    <h3>When to Trade an Iron Condor</h3>
+    <p><em>Ideal: price oscillating between support and resistance with no strong trend and elevated implied volatility.</em></p>
+    <ul class="check-list">
+      <li class="check"><strong>Sideways outlook:</strong> You expect the stock or index to stay range-bound — not trend sharply up or down.</li>
+      <li class="check"><strong>Elevated IV, expected to fall:</strong> High implied volatility means richer premium; you profit as it settles.</li>
+      <li class="check"><strong>Time on your side:</strong> Roughly 30–45 days to expiration lets time decay (theta) work for you.</li>
+      <li class="check"><strong>Liquid underlyings:</strong> Trade index ETFs or large-cap names with tight, liquid options markets.</li>
+    </ul>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 3 · Lesson 6</div>
+    <h3>Managing the Trade &amp; Staying Safe</h3>
+    <div class="two-col">
+      <div class="col-card green">
+        <div class="col-title">Smart Habits</div>
+        <ul>
+          <li>Take profits early — many close at 50% of max profit</li>
+          <li>Size small — risk only 1–2% of your account per trade</li>
+          <li>Have an exit plan <em>before</em> you enter the trade</li>
+          <li>Watch a short strike being tested near expiration</li>
+          <li>Keep a journal — track every condor to see what works</li>
+        </ul>
+      </div>
+      <div class="col-card rose">
+        <div class="col-title">Common Mistakes</div>
+        <ul>
+          <li>Strikes too close — a narrow range gets breached often</li>
+          <li>Trading illiquid options with wide bid-ask spreads</li>
+          <li>Holding losers too long, hoping the price comes back</li>
+          <li>Ignoring earnings or events inside the trade window</li>
+          <li>Over-sizing — one bad trade wipes out many winners</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div class="module-header" style="background:linear-gradient(135deg,#3a2a08,#7a5a10)">
+    <div class="module-num" style="background:rgba(224,197,131,.15);border-color:var(--goldl);color:var(--goldl)">📋</div>
+    <div>
+      <p class="module-title">Quick Reference</p>
+      <p class="module-sub">Key terms at a glance — review before the exam.</p>
+    </div>
+  </div>
+
+  <div class="gloss-grid">
+    <div class="gloss-card"><div class="gloss-term">Call / Put</div><div class="gloss-def">Right to buy / right to sell at the strike price.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Premium</div><div class="gloss-def">Price of the option; the seller's income collected up front.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Credit Spread</div><div class="gloss-def">Sell-to-open spread that collects premium; profits from time decay.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Iron Condor</div><div class="gloss-def">Put credit spread below + call credit spread above the current price.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Short Strikes</div><div class="gloss-def">The sold inner legs that define your profit range.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Long Strikes</div><div class="gloss-def">The bought outer wings that cap your maximum risk.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Max Profit</div><div class="gloss-def">Net credit received × 100 per contract.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Max Loss</div><div class="gloss-def">(Wing width − credit) × 100 per contract.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Break-Even</div><div class="gloss-def">Short strike ± net credit, on each side of the condor.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Theta</div><div class="gloss-def">Time decay — value sellers earn each day as expiration approaches.</div></div>
+  </div>
+
+  <!-- EXAM CTA -->
+  <div class="exam-cta">
+    <h2>You've Completed the Basic Course</h2>
+    <p>25 questions · 45-minute time limit · Score 70% or higher to earn your Basic Certificate</p>
+    <a class="btn-exam" href="/basic">Start the Basic Exam &nbsp;→</a>
+  </div>
+
+  <footer>
+    Iron Condors Academy · Basic Course Lesson &nbsp;·&nbsp; <a href="/">All Courses</a> &nbsp;·&nbsp; <a href="/verify.html">Verify a certificate</a><br><br>
+    Educational content only. Options involve substantial risk and are not suitable for all investors.
+  </footer>
+
+</div>
+</body>
+</html>

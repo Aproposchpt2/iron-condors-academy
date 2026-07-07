@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Intermediate Course Lesson — Iron Condors Academy</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#0B1220;--slate:#32405C;--body:#4A5468;--mute:#6B7280;
+    --line:#E4E0D3;--panel:#F4F1E8;--panel2:#FAF8F3;
+    --teal:#0F2A6A;--tealb:#1E3F8F;--tealx:#E8EAF3;
+    --gold:#B8923E;--goldl:#E0C583;--goldx:#FBF3DE;
+    --green:#0D7A4C;--greenx:#DEF3E7;--rose:#B0264A;--rosex:#FBE4EA;
+    --radius:14px;--shadow:0 10px 32px rgba(15,26,42,.12);
+    --serif:'Bodoni Moda',Georgia,serif;--accent:'Cormorant',Georgia,serif;
+  }
+  *{box-sizing:border-box}html,body{margin:0;padding:0}
+  body{font-family:'Jost',-apple-system,sans-serif;color:var(--ink);background:var(--panel2);
+    background-image:radial-gradient(circle at 12% 8%,rgba(184,146,62,.07),transparent 42%),radial-gradient(circle at 92% 4%,rgba(15,42,106,.06),transparent 38%);
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px 80px}
+  .site-header{background:linear-gradient(160deg,#0A1A45,#0F2A6A 55%,#0C2258);border-bottom:2px solid var(--gold);box-shadow:0 4px 24px rgba(10,20,50,.35);position:relative}
+  .site-header::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .site-header-inner{max-width:860px;margin:0 auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+  .brand-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 32% 28%,#1E3F8F,#0A1A45 70%);color:var(--goldl);font-weight:700;font-family:var(--serif);font-size:1rem;box-shadow:0 0 0 2px var(--gold),0 0 0 4px rgba(184,146,62,.2)}
+  .brand-text strong{display:block;font-family:var(--serif);font-size:1.05rem;color:#fff}
+  .brand-text span{display:block;color:var(--goldl);font-size:.72rem;font-family:var(--accent);font-style:italic}
+  .header-links{display:flex;gap:6px}
+  .header-link{font-size:.78rem;font-weight:600;color:rgba(255,255,255,.65);text-decoration:none;padding:6px 11px;border-radius:7px;border:1px solid transparent;transition:.15s}
+  .header-link:hover{background:rgba(224,197,131,.12);border-color:rgba(224,197,131,.35);color:var(--goldl)}
+  .lesson-hero{padding:40px 0 28px;border-bottom:1px solid var(--line);margin-bottom:36px}
+  .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.74rem;font-weight:600;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+  .breadcrumb a{color:var(--mute);text-decoration:none}.breadcrumb a:hover{color:var(--teal)}
+  .breadcrumb-sep{color:var(--line)}
+  .level-badge{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 14px;border-radius:999px;background:var(--tealx);color:var(--teal);border:1px solid rgba(15,42,106,.2);margin-bottom:12px}
+  .lesson-hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.8rem);font-weight:700;color:var(--ink);margin:0 0 12px;line-height:1.1}
+  .lesson-hero .sub{color:var(--body);font-size:1rem;max-width:60ch;line-height:1.7;margin:0}
+  .obj-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;margin-bottom:36px;position:relative;overflow:hidden}
+  .obj-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+  .obj-box h2{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);margin:0 0 14px}
+  .obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+  .obj-item{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--body);line-height:1.5}
+  .obj-num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-size:.76rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.05em}
+  .obj-text strong{display:block;color:var(--ink);font-weight:600;font-size:.9rem}
+  .module-header{display:flex;align-items:center;gap:14px;margin:40px 0 20px;padding:18px 22px;background:linear-gradient(135deg,#0A1A45,#0F2A6A);border-radius:var(--radius);color:#fff}
+  .module-num{width:44px;height:44px;border-radius:50%;background:rgba(224,197,131,.2);border:2px solid var(--goldl);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--goldl);flex:none}
+  .module-title{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:#fff;margin:0 0 2px}
+  .module-sub{font-size:.82rem;color:rgba(255,255,255,.65);margin:0}
+  .lesson-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;margin-bottom:16px;position:relative;overflow:hidden}
+  .lesson-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));opacity:.5}
+  .lesson-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .lesson-label::before{content:'';width:18px;height:1px;background:var(--mute)}
+  .lesson-card h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--ink);margin:0 0 14px;line-height:1.15}
+  .lesson-card p{font-size:.95rem;color:var(--body);line-height:1.7;margin:0 0 12px}
+  .lesson-card p:last-child{margin-bottom:0}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .col-card{border-radius:10px;padding:16px 18px}
+  .col-card.green{background:var(--greenx);border:1px solid rgba(13,122,76,.2)}
+  .col-card.blue{background:var(--tealx);border:1px solid rgba(15,42,106,.2)}
+  .col-card.gold{background:var(--goldx);border:1px solid rgba(184,146,62,.2)}
+  .col-card.rose{background:var(--rosex);border:1px solid rgba(176,38,74,.2)}
+  .col-title{font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .col-card.green .col-title{color:var(--green)}
+  .col-card.blue .col-title{color:var(--teal)}
+  .col-card.gold .col-title{color:#7a5a10}
+  .col-card.rose .col-title{color:var(--rose)}
+  .col-card ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .col-card li{font-size:.88rem;color:var(--body);line-height:1.5;display:flex;gap:8px}
+  .col-card li::before{content:'•';flex:none;font-weight:700;margin-top:.05em}
+  .col-card.green li::before{color:var(--green)}.col-card.blue li::before{color:var(--teal)}.col-card.gold li::before{color:var(--gold)}.col-card.rose li::before{color:var(--rose)}
+  .key-idea{background:var(--goldx);border:1px solid rgba(184,146,62,.25);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:.9rem;color:var(--slate);line-height:1.6}
+  .key-idea strong{color:var(--ink)}
+  .four-greek{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}
+  .greek-card{border-radius:10px;padding:16px 18px;border:1px solid var(--line)}
+  .greek-name{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:4px}
+  .greek-sign{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:inline-block;padding:2px 10px;border-radius:999px}
+  .sign-pos{background:var(--greenx);color:var(--green);border:1px solid rgba(13,122,76,.2)}
+  .sign-neg{background:var(--rosex);color:var(--rose);border:1px solid rgba(176,38,74,.2)}
+  .sign-neutral{background:var(--tealx);color:var(--teal);border:1px solid rgba(15,42,106,.2)}
+  .greek-desc{font-size:.88rem;color:var(--body);line-height:1.55}
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:14px 0}
+  .stat-box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .stat-box .sb-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+  .stat-box .sb-value{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--teal);margin-bottom:4px}
+  .stat-box .sb-desc{font-size:.82rem;color:var(--body);line-height:1.45}
+  .rule-list{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
+  .rule-list li{display:flex;gap:12px;align-items:flex-start;font-size:.93rem;color:var(--body);line-height:1.55;padding:12px 14px;background:var(--panel2);border-radius:10px;border:1px solid var(--line)}
+  .rule-list li strong{display:block;color:var(--ink);margin-bottom:2px}
+  .rule-icon{font-size:1.1rem;flex:none;line-height:1.4}
+  .deflist{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
+  .deflist li{display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:baseline;font-size:.93rem;padding:10px 0;border-bottom:1px solid var(--line)}
+  .deflist li:last-child{border-bottom:none}
+  .deflist .term{font-weight:700;color:var(--ink)}
+  .deflist .def{color:var(--body);line-height:1.55}
+  .gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+  .gloss-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .gloss-term{font-weight:700;font-size:.88rem;color:var(--ink);margin-bottom:4px}
+  .gloss-def{font-size:.83rem;color:var(--body);line-height:1.5}
+  .exam-cta{background:linear-gradient(135deg,#0A1A45,#0F2A6A);border-radius:var(--radius);padding:36px 28px;text-align:center;margin:48px 0 0;position:relative;overflow:hidden}
+  .exam-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .exam-cta h2{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:#fff;margin:0 0 8px}
+  .exam-cta p{color:rgba(255,255,255,.7);font-size:.95rem;margin:0 0 24px;line-height:1.6}
+  .btn-exam{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--goldl),var(--gold));color:#0A1A45;font-family:var(--serif);font-size:1.1rem;font-weight:700;padding:16px 36px;border-radius:999px;text-decoration:none;box-shadow:0 6px 24px rgba(184,146,62,.4);transition:.2s;letter-spacing:.02em}
+  .btn-exam:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,146,62,.5)}
+  footer{margin-top:48px;text-align:center;background:linear-gradient(160deg,#0C2258,#0A1A45);color:#C9CEDD;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;padding:24px 16px 28px;border-radius:var(--radius);position:relative;overflow:hidden}
+  footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  footer a{color:var(--goldl);text-decoration:none}
+  @media(max-width:600px){.two-col,.four-greek{grid-template-columns:1fr}.deflist li{grid-template-columns:1fr}.obj-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">IC</span>
+      <span class="brand-text"><strong>Iron Condors Academy</strong><span>Defined-risk options certification</span></span>
+    </a>
+    <div class="header-links">
+      <a class="header-link" href="/intermediate">← Course Overview</a>
+      <a class="header-link" href="/">All Courses</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lesson-hero">
+    <div class="breadcrumb">
+      <a href="/">Home</a><span class="breadcrumb-sep">›</span>
+      <a href="/intermediate">Intermediate Course</a><span class="breadcrumb-sep">›</span>
+      <span>Lesson</span>
+    </div>
+    <span class="level-badge">Course 2 of 3 · Intermediate</span>
+    <h1>Iron Condors — Intermediate Course</h1>
+    <p class="sub">Probability, Greeks &amp; Trade Management. Work through every module, then take the exam at the bottom of the page to earn your certificate.</p>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div class="obj-box">
+    <h2>By the End of This Course You Will Be Able To</h2>
+    <div class="obj-grid">
+      <div class="obj-item"><span class="obj-num">1</span><div class="obj-text"><strong>Read the Greeks</strong>Interpret delta, theta, vega, and gamma for a live condor.</div></div>
+      <div class="obj-item"><span class="obj-num">2</span><div class="obj-text"><strong>Think in probability</strong>Use delta as a probability proxy and target a realistic POP.</div></div>
+      <div class="obj-item"><span class="obj-num">3</span><div class="obj-text"><strong>Time your entries</strong>Use IV rank and 30–45 DTE to open trades with an edge.</div></div>
+      <div class="obj-item"><span class="obj-num">4</span><div class="obj-text"><strong>Manage actively</strong>Apply 50%-profit and 21-DTE rules to exit with discipline.</div></div>
+      <div class="obj-item"><span class="obj-num">5</span><div class="obj-text"><strong>Adjust under pressure</strong>Roll the untested side for credit when a strike is tested.</div></div>
+      <div class="obj-item"><span class="obj-num">6</span><div class="obj-text"><strong>Size correctly</strong>Right-size each condor to your account and buying power.</div></div>
+    </div>
+  </div>
+
+  <!-- MODULE 4 -->
+  <div class="module-header">
+    <div class="module-num">4</div>
+    <div>
+      <p class="module-title">Greeks &amp; Probability</p>
+      <p class="module-sub">How delta, theta, vega and gamma shape a condor — and how to think in odds.</p>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 4 · Lesson 1</div>
+    <h3>The Greeks of a Condor</h3>
+    <p>An iron condor has a distinct Greek signature. Reading it tells you what helps the trade and what hurts it.</p>
+    <div class="four-greek">
+      <div class="greek-card">
+        <div class="greek-name">Delta</div>
+        <span class="greek-sign sign-neutral">≈ 0 at entry</span>
+        <div class="greek-desc">Balanced at entry — you're neutral, not betting on direction. Rises if price moves toward a short strike.</div>
+      </div>
+      <div class="greek-card">
+        <div class="greek-name">Theta</div>
+        <span class="greek-sign sign-pos">Positive — works for you</span>
+        <div class="greek-desc">Time decay is your engine. The position gains value as each day passes — theta is the seller's daily income.</div>
+      </div>
+      <div class="greek-card">
+        <div class="greek-name">Vega</div>
+        <span class="greek-sign sign-neg">Negative — IV hurts</span>
+        <div class="greek-desc">Short volatility — you profit when implied volatility falls. An IV spike after entry creates a paper loss.</div>
+      </div>
+      <div class="greek-card">
+        <div class="greek-name">Gamma</div>
+        <span class="greek-sign sign-neg">Danger near expiry</span>
+        <div class="greek-desc">Gamma risk grows when price nears a short strike close to expiration. This is why 21-DTE management matters.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 4 · Lesson 2</div>
+    <h3>Probability &amp; Delta</h3>
+    <p>Option delta doubles as a rough probability. Use it to choose strikes and set realistic expectations for every trade.</p>
+    <div class="stat-row">
+      <div class="stat-box"><div class="sb-label">Delta as Odds</div><div class="sb-value">0.16 delta</div><div class="sb-desc">≈ 16% chance of finishing in the money. Flipped: 84% probability of expiring worthless — in your favor.</div></div>
+      <div class="stat-box"><div class="sb-label">~1 Standard Deviation</div><div class="sb-value">16-delta strikes</div><div class="sb-desc">Selling the 16-delta strikes places your short strikes approximately one standard deviation from current price.</div></div>
+      <div class="stat-box"><div class="sb-label">Target POP</div><div class="sb-value">65 – 85%</div><div class="sb-desc">A realistic probability-of-profit band for a balanced condor — achievable without strikes too close to the money.</div></div>
+    </div>
+    <div class="key-idea"><strong>Closer = richer, riskier:</strong> Strikes nearer the money pay more credit but lower your probability of profit. Delta targeting keeps you disciplined.</div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 4 · Lesson 3</div>
+    <h3>Timing With IV Rank</h3>
+    <p>Premium sellers want to sell when options are expensive. <strong>IV rank tells you when that is.</strong></p>
+    <ul class="deflist">
+      <li><span class="term">What IV Rank Means</span><span class="def">Where today's implied volatility sits within its own one-year range. High rank = options are expensive relative to their history.</span></li>
+      <li><span class="term">Sell High IV Rank</span><span class="def">Open condors when IV rank is elevated — you collect richer premium and benefit if IV reverts to normal (vega income).</span></li>
+      <li><span class="term">30–45 DTE Sweet Spot</span><span class="def">Enough premium to sell, with theta decay accelerating into expiry. Not so short that gamma risk is already elevated.</span></li>
+      <li><span class="term">Mind the Events</span><span class="def">Avoid holding through earnings or scheduled news inside the trade window. Earnings gaps can jump straight through a wing.</span></li>
+    </ul>
+  </div>
+
+  <!-- MODULE 5 -->
+  <div class="module-header">
+    <div class="module-num">5</div>
+    <div>
+      <p class="module-title">Managing &amp; Adjusting</p>
+      <p class="module-sub">Turn a good entry into a good outcome with clear rules and timely repairs.</p>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 5 · Lesson 1</div>
+    <h3>Managing the Trade</h3>
+    <p>Most of a condor's edge comes from <strong>disciplined management</strong>, not the entry alone. Have every rule set before you place the order.</p>
+    <ul class="rule-list">
+      <li><span class="rule-icon">🎯</span><div><strong>Take profit at 50%</strong>Close near half of max profit rather than squeezing the last dollars. Frees capital and removes late-stage gamma risk.</div></li>
+      <li><span class="rule-icon">📅</span><div><strong>Manage at 21 DTE</strong>Around three weeks out, gamma risk rises sharply. Exit or roll at this point — holding further requires strong conviction.</div></li>
+      <li><span class="rule-icon">💰</span><div><strong>Know your BPR</strong>Buying-power reduction ≈ the trade's max loss on one side. This is the capital the broker sets aside — size trades to this number.</div></li>
+      <li><span class="rule-icon">📋</span><div><strong>Have an exit first</strong>Define your profit target and stop-loss <em>before</em> you place the order. Never improvise your exit mid-trade.</div></li>
+    </ul>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 5 · Lesson 2</div>
+    <h3>Adjustments: Rolling</h3>
+    <p>When price presses one side, small repairs can defend the trade and add credit. Rolling = closing the current spread and opening a new one at different strikes or expiration.</p>
+    <div class="two-col">
+      <div class="col-card green">
+        <div class="col-title">Roll for Credit</div>
+        <ul>
+          <li>Roll the untested side in to collect more premium</li>
+          <li>The added credit widens your break-even on the tested side</li>
+          <li><strong>Only roll for a net credit — never pay to repair</strong></li>
+          <li>Keep the position delta-aware, not wildly directional</li>
+        </ul>
+      </div>
+      <div class="col-card rose">
+        <div class="col-title">What Rolling Is NOT</div>
+        <ul>
+          <li>Rolling out in time buys room but extends your risk</li>
+          <li>Repeated rolling to dodge a loss can <strong>compound</strong> it</li>
+          <li>Never roll just because you don't want to book a loss</li>
+          <li>Respect your max loss — don't marry a losing trade</li>
+        </ul>
+      </div>
+    </div>
+    <div class="key-idea"><strong>Bottom line:</strong> Defend for a credit, respect your max loss, and don't let a manageable loss become a large one through repeated rolling.</div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 5 · Lesson 3</div>
+    <h3>Structure &amp; Sizing</h3>
+    <p>Two dials — <strong>wing width</strong> and <strong>position size</strong> — control how much you can win or lose on any single condor.</p>
+    <div class="stat-row">
+      <div class="stat-box"><div class="sb-label">Wider Wings</div><div class="sb-value">More credit</div><div class="sb-desc">More premium collected, but a larger capped max loss to carry. Wider lanes also mean less frequent breaches.</div></div>
+      <div class="stat-box"><div class="sb-label">Narrower Wings</div><div class="sb-value">Less risk / contract</div><div class="sb-desc">Smaller reward and max loss per contract. Can trade more contracts for same capital — but breached more often.</div></div>
+      <div class="stat-box"><div class="sb-label">Position Size Rule</div><div class="sb-value">1 – 5% per trade</div><div class="sb-desc">Risk only a small slice of the account on any one condor. Assume the worst case can — and sometimes does — happen.</div></div>
+    </div>
+  </div>
+
+  <!-- QUICK REF -->
+  <div class="module-header" style="background:linear-gradient(135deg,#3a2a08,#7a5a10)">
+    <div class="module-num" style="background:rgba(224,197,131,.15);border-color:var(--goldl);color:var(--goldl)">📋</div>
+    <div>
+      <p class="module-title">Quick Reference</p>
+      <p class="module-sub">Key terms at a glance — review before the exam.</p>
+    </div>
+  </div>
+
+  <div class="gloss-grid">
+    <div class="gloss-card"><div class="gloss-term">Delta</div><div class="gloss-def">Directional exposure; also a rough probability of finishing ITM. Sell at ~0.16 for ~84% chance of expiring worthless.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Theta</div><div class="gloss-def">Daily time decay — income for the condor seller. Accelerates in the final 3 weeks before expiry.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Vega</div><div class="gloss-def">Sensitivity to implied volatility. A condor is short vega — IV spikes create paper losses.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Gamma</div><div class="gloss-def">How fast delta changes. The risk near short strikes at expiry — the reason to manage at 21 DTE.</div></div>
+    <div class="gloss-card"><div class="gloss-term">IV Rank</div><div class="gloss-def">Where current IV sits in its own one-year range. Sell premium when IV rank is elevated.</div></div>
+    <div class="gloss-card"><div class="gloss-term">POP</div><div class="gloss-def">Probability of profit — target roughly 65–85% for a balanced condor.</div></div>
+    <div class="gloss-card"><div class="gloss-term">DTE</div><div class="gloss-def">Days to expiration. Open near 30–45 DTE, manage or close at 21 DTE.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Roll</div><div class="gloss-def">Close and reopen a spread at new strikes or dates. Only do it for a net credit.</div></div>
+    <div class="gloss-card"><div class="gloss-term">BPR</div><div class="gloss-def">Buying-power reduction ≈ the trade's max loss. The capital the broker holds while the trade is open.</div></div>
+    <div class="gloss-card"><div class="gloss-term">50% Rule</div><div class="gloss-def">Common profit target: close at half of maximum credit collected. Locks gains and removes gamma risk.</div></div>
+  </div>
+
+  <!-- EXAM CTA -->
+  <div class="exam-cta">
+    <h2>You've Completed the Intermediate Course</h2>
+    <p>25 questions · 45-minute time limit · Score 70% or higher to earn your Intermediate Certificate</p>
+    <a class="btn-exam" href="/intermediate">Start the Intermediate Exam &nbsp;→</a>
+  </div>
+
+  <footer>
+    Iron Condors Academy · Intermediate Course Lesson &nbsp;·&nbsp; <a href="/">All Courses</a> &nbsp;·&nbsp; <a href="/verify.html">Verify a certificate</a><br><br>
+    Educational content only. Options involve substantial risk and are not suitable for all investors.
+  </footer>
+
+</div>
+</body>
+</html>

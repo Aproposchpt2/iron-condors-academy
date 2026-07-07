@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Advanced Course Lesson — Iron Condors Academy</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#0B1220;--slate:#32405C;--body:#4A5468;--mute:#6B7280;
+    --line:#E4E0D3;--panel:#F4F1E8;--panel2:#FAF8F3;
+    --teal:#0F2A6A;--tealb:#1E3F8F;--tealx:#E8EAF3;
+    --gold:#B8923E;--goldl:#E0C583;--goldx:#FBF3DE;
+    --green:#0D7A4C;--greenx:#DEF3E7;--rose:#B0264A;--rosex:#FBE4EA;
+    --radius:14px;--shadow:0 10px 32px rgba(15,26,42,.12);
+    --serif:'Bodoni Moda',Georgia,serif;--accent:'Cormorant',Georgia,serif;
+  }
+  *{box-sizing:border-box}html,body{margin:0;padding:0}
+  body{font-family:'Jost',-apple-system,sans-serif;color:var(--ink);background:var(--panel2);
+    background-image:radial-gradient(circle at 12% 8%,rgba(184,146,62,.07),transparent 42%),radial-gradient(circle at 92% 4%,rgba(15,42,106,.06),transparent 38%);
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px 80px}
+  .site-header{background:linear-gradient(160deg,#0A1A45,#0F2A6A 55%,#0C2258);border-bottom:2px solid var(--gold);box-shadow:0 4px 24px rgba(10,20,50,.35);position:relative}
+  .site-header::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .site-header-inner{max-width:860px;margin:0 auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+  .brand-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 32% 28%,#1E3F8F,#0A1A45 70%);color:var(--goldl);font-weight:700;font-family:var(--serif);font-size:1rem;box-shadow:0 0 0 2px var(--gold),0 0 0 4px rgba(184,146,62,.2)}
+  .brand-text strong{display:block;font-family:var(--serif);font-size:1.05rem;color:#fff}
+  .brand-text span{display:block;color:var(--goldl);font-size:.72rem;font-family:var(--accent);font-style:italic}
+  .header-links{display:flex;gap:6px}
+  .header-link{font-size:.78rem;font-weight:600;color:rgba(255,255,255,.65);text-decoration:none;padding:6px 11px;border-radius:7px;border:1px solid transparent;transition:.15s}
+  .header-link:hover{background:rgba(224,197,131,.12);border-color:rgba(224,197,131,.35);color:var(--goldl)}
+  .lesson-hero{padding:40px 0 28px;border-bottom:1px solid var(--line);margin-bottom:36px}
+  .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.74rem;font-weight:600;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+  .breadcrumb a{color:var(--mute);text-decoration:none}.breadcrumb a:hover{color:var(--teal)}
+  .breadcrumb-sep{color:var(--line)}
+  .level-badge{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 14px;border-radius:999px;background:var(--goldx);color:#7a5a10;border:1px solid rgba(184,146,62,.25);margin-bottom:12px}
+  .lesson-hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.8rem);font-weight:700;color:var(--ink);margin:0 0 12px;line-height:1.1}
+  .lesson-hero .sub{color:var(--body);font-size:1rem;max-width:60ch;line-height:1.7;margin:0}
+  .obj-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;margin-bottom:36px;position:relative;overflow:hidden}
+  .obj-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+  .obj-box h2{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);margin:0 0 14px}
+  .obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+  .obj-item{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--body);line-height:1.5}
+  .obj-num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-size:.76rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.05em}
+  .obj-text strong{display:block;color:var(--ink);font-weight:600;font-size:.9rem}
+  .module-header{display:flex;align-items:center;gap:14px;margin:40px 0 20px;padding:18px 22px;background:linear-gradient(135deg,#0A1A45,#0F2A6A);border-radius:var(--radius);color:#fff}
+  .module-num{width:44px;height:44px;border-radius:50%;background:rgba(224,197,131,.2);border:2px solid var(--goldl);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--goldl);flex:none}
+  .module-title{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:#fff;margin:0 0 2px}
+  .module-sub{font-size:.82rem;color:rgba(255,255,255,.65);margin:0}
+  .lesson-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;margin-bottom:16px;position:relative;overflow:hidden}
+  .lesson-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));opacity:.5}
+  .lesson-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .lesson-label::before{content:'';width:18px;height:1px;background:var(--mute)}
+  .lesson-card h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--ink);margin:0 0 14px;line-height:1.15}
+  .lesson-card p{font-size:.95rem;color:var(--body);line-height:1.7;margin:0 0 12px}
+  .lesson-card p:last-child{margin-bottom:0}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .col-card{border-radius:10px;padding:16px 18px}
+  .col-card.green{background:var(--greenx);border:1px solid rgba(13,122,76,.2)}
+  .col-card.blue{background:var(--tealx);border:1px solid rgba(15,42,106,.2)}
+  .col-card.gold{background:var(--goldx);border:1px solid rgba(184,146,62,.2)}
+  .col-card.rose{background:var(--rosex);border:1px solid rgba(176,38,74,.2)}
+  .col-title{font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .col-card.green .col-title{color:var(--green)}.col-card.blue .col-title{color:var(--teal)}.col-card.gold .col-title{color:#7a5a10}.col-card.rose .col-title{color:var(--rose)}
+  .col-card ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .col-card li{font-size:.88rem;color:var(--body);line-height:1.5;display:flex;gap:8px}
+  .col-card li::before{content:'•';flex:none;font-weight:700;margin-top:.05em}
+  .col-card.green li::before{color:var(--green)}.col-card.blue li::before{color:var(--teal)}.col-card.gold li::before{color:var(--gold)}.col-card.rose li::before{color:var(--rose)}
+  .key-idea{background:var(--goldx);border:1px solid rgba(184,146,62,.25);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:.9rem;color:var(--slate);line-height:1.6}
+  .key-idea strong{color:var(--ink)}
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:14px 0}
+  .stat-box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .stat-box .sb-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+  .stat-box .sb-value{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--teal);margin-bottom:4px}
+  .stat-box .sb-desc{font-size:.82rem;color:var(--body);line-height:1.45}
+  .deflist{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
+  .deflist li{display:grid;grid-template-columns:200px 1fr;gap:12px;align-items:baseline;font-size:.93rem;padding:10px 0;border-bottom:1px solid var(--line)}
+  .deflist li:last-child{border-bottom:none}
+  .deflist .term{font-weight:700;color:var(--ink)}
+  .deflist .def{color:var(--body);line-height:1.55}
+  .rule-list{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
+  .rule-list li{display:flex;gap:12px;align-items:flex-start;font-size:.93rem;color:var(--body);line-height:1.55;padding:12px 14px;background:var(--panel2);border-radius:10px;border:1px solid var(--line)}
+  .rule-list li strong{display:block;color:var(--ink);margin-bottom:2px}
+  .rule-icon{font-size:1.1rem;flex:none;line-height:1.4}
+  .gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+  .gloss-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .gloss-term{font-weight:700;font-size:.88rem;color:var(--ink);margin-bottom:4px}
+  .gloss-def{font-size:.83rem;color:var(--body);line-height:1.5}
+  .exam-cta{background:linear-gradient(135deg,#0A1A45,#0F2A6A);border-radius:var(--radius);padding:36px 28px;text-align:center;margin:48px 0 0;position:relative;overflow:hidden}
+  .exam-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .exam-cta h2{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:#fff;margin:0 0 8px}
+  .exam-cta p{color:rgba(255,255,255,.7);font-size:.95rem;margin:0 0 24px;line-height:1.6}
+  .btn-exam{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--goldl),var(--gold));color:#0A1A45;font-family:var(--serif);font-size:1.1rem;font-weight:700;padding:16px 36px;border-radius:999px;text-decoration:none;box-shadow:0 6px 24px rgba(184,146,62,.4);transition:.2s;letter-spacing:.02em}
+  .btn-exam:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,146,62,.5)}
+  footer{margin-top:48px;text-align:center;background:linear-gradient(160deg,#0C2258,#0A1A45);color:#C9CEDD;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;padding:24px 16px 28px;border-radius:var(--radius);position:relative;overflow:hidden}
+  footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  footer a{color:var(--goldl);text-decoration:none}
+  @media(max-width:600px){.two-col{grid-template-columns:1fr}.deflist li{grid-template-columns:1fr}.obj-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">IC</span>
+      <span class="brand-text"><strong>Iron Condors Academy</strong><span>Defined-risk options certification</span></span>
+    </a>
+    <div class="header-links">
+      <a class="header-link" href="/advanced">← Course Overview</a>
+      <a class="header-link" href="/">All Courses</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lesson-hero">
+    <div class="breadcrumb">
+      <a href="/">Home</a><span class="breadcrumb-sep">›</span>
+      <a href="/advanced">Advanced Course</a><span class="breadcrumb-sep">›</span>
+      <span>Lesson</span>
+    </div>
+    <span class="level-badge">Course 3 of 3 · Advanced</span>
+    <h1>Iron Condors — Advanced Course</h1>
+    <p class="sub">Volatility, Adjustments &amp; Portfolio Risk. Work through every module, then take the final exam at the bottom of the page to complete your certification.</p>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <div class="obj-box">
+    <h2>By the End of This Course You Will Be Able To</h2>
+    <div class="obj-grid">
+      <div class="obj-item"><span class="obj-num">1</span><div class="obj-text"><strong>Trade the skew</strong>Exploit richer put-side premium created by volatility skew.</div></div>
+      <div class="obj-item"><span class="obj-num">2</span><div class="obj-text"><strong>Read higher-order Greeks</strong>Use vomma and gamma / pin risk to anticipate trouble.</div></div>
+      <div class="obj-item"><span class="obj-num">3</span><div class="obj-text"><strong>Shape the structure</strong>Build broken-wing condors to reshape the risk graph on purpose.</div></div>
+      <div class="obj-item"><span class="obj-num">4</span><div class="obj-text"><strong>Defend like a pro</strong>Roll for credit and make delta-neutral adjustments under pressure.</div></div>
+      <div class="obj-item"><span class="obj-num">5</span><div class="obj-text"><strong>Manage a portfolio</strong>Watch beta-weighted delta and buying-power limits across all positions.</div></div>
+      <div class="obj-item"><span class="obj-num">6</span><div class="obj-text"><strong>Survive the tails</strong>Size for risk of ruin and respect volatility shocks.</div></div>
+    </div>
+  </div>
+
+  <!-- MODULE 6 -->
+  <div class="module-header">
+    <div class="module-num">6</div>
+    <div>
+      <p class="module-title">Volatility &amp; Greeks</p>
+      <p class="module-sub">Skew, higher-order Greeks, and the expected move that frames every trade.</p>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 6 · Lesson 1</div>
+    <h3>Volatility Skew</h3>
+    <p>Index options aren't priced symmetrically. <strong>Understanding skew makes you a sharper seller.</strong></p>
+    <ul class="deflist">
+      <li><span class="term">Put Skew</span><span class="def">OTM puts carry higher implied volatility than equidistant calls. The market pays up for downside crash protection.</span></li>
+      <li><span class="term">Richer Put Side</span><span class="def">Skew lets you sell the put spread further out from the money for the same credit as a closer call spread. Use this asymmetry.</span></li>
+      <li><span class="term">Why It Exists</span><span class="def">Institutions and funds buy put protection at scale, bidding up OTM put prices. This is structural — it persists in most market conditions.</span></li>
+      <li><span class="term">Trade the Imbalance</span><span class="def">Shift your put strikes to reflect where the premium really is. A skew-aware condor often has unequal wings by design.</span></li>
+    </ul>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 6 · Lesson 2</div>
+    <h3>Higher-Order Greeks</h3>
+    <p>Beyond the first Greeks, second-order effects drive risk near expiration. Knowing them keeps you ahead of trouble.</p>
+    <div class="stat-row">
+      <div class="stat-box"><div class="sb-label">Vomma</div><div class="sb-value">Vega's rate of change</div><div class="sb-desc">How vega itself changes as implied volatility moves. High vomma = vega can expand rapidly in a volatility shock.</div></div>
+      <div class="stat-box"><div class="sb-label">Gamma Near Expiry</div><div class="sb-value">The late-trade danger</div><div class="sb-desc">Small price moves swing P&L violently at a short strike late in the trade. Exit or reduce size before this peaks.</div></div>
+      <div class="stat-box"><div class="sb-label">Pin Risk</div><div class="sb-value">Price at expiry = strike</div><div class="sb-desc">Closing exactly at a short strike creates assignment uncertainty. Know your broker's exercise rules heading into expiry.</div></div>
+    </div>
+    <div class="key-idea"><strong>Stay ahead:</strong> Reduce size or exit before gamma and pin risk peak — typically inside 7 days to expiration on a tested strike.</div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 6 · Lesson 3</div>
+    <h3>Expected Move &amp; Term Structure</h3>
+    <p>Let the option market tell you how far price is likely to travel — then <strong>sell outside it</strong>.</p>
+    <div class="two-col">
+      <div class="col-card blue">
+        <div class="col-title">Expected Move</div>
+        <ul>
+          <li>Estimate from the ATM straddle price</li>
+          <li>Represents ~1 standard deviation of expected move</li>
+          <li>Place short strikes <strong>beyond</strong> the expected move for cushion</li>
+          <li>Recalculate as DTE shrinks — the range narrows</li>
+        </ul>
+      </div>
+      <div class="col-card gold">
+        <div class="col-title">Term Structure</div>
+        <ul>
+          <li>Compare IV across expirations</li>
+          <li>Contango = longer-dated IV is higher (normal)</li>
+          <li>Backwardation = near-term IV elevated (crisis signal)</li>
+          <li>Calendars &amp; diagonals harvest IV differences between dates</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 7 -->
+  <div class="module-header">
+    <div class="module-num">7</div>
+    <div>
+      <p class="module-title">Structures &amp; Defense</p>
+      <p class="module-sub">Broken wings, rolling, and defending a tested trade under fire.</p>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 7 · Lesson 1</div>
+    <h3>Broken-Wing Condors</h3>
+    <p>Making one spread wider than the other <strong>reshapes the risk graph on purpose</strong>.</p>
+    <div class="two-col">
+      <div class="col-card blue">
+        <div class="col-title">The Structure</div>
+        <ul>
+          <li>Widen one side's wing relative to the other</li>
+          <li>Skews the risk toward the side you fear less</li>
+          <li>Often financed by the extra width's credit</li>
+          <li>Useful when skew or a directional bias favors one side</li>
+        </ul>
+      </div>
+      <div class="col-card green">
+        <div class="col-title">The Benefit</div>
+        <ul>
+          <li>Can cut — or even remove — risk on the narrow side</li>
+          <li>Lets you lean directionally while staying defined-risk</li>
+          <li>Trades symmetry for a friendlier payoff on one side</li>
+          <li><strong>Watch the wider side — that's where max loss lives</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="key-idea"><strong>Bottom line:</strong> Broken wings are a scalpel — reshape risk deliberately, not to rescue a bad trade. Know where your max loss moves before you use this structure.</div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 7 · Lesson 2</div>
+    <h3>Rolling &amp; Defense</h3>
+    <p>When a side is tested, professionals defend <strong>with credit and keep the book near neutral</strong>.</p>
+    <div class="two-col">
+      <div class="col-card green">
+        <div class="col-title">Roll for Credit</div>
+        <ul>
+          <li>Roll the tested side out in time for a net credit</li>
+          <li>Roll the untested side in to collect more premium</li>
+          <li>Every credit widens your break-even</li>
+          <li><strong>Never roll for a debit just to avoid a loss</strong></li>
+        </ul>
+      </div>
+      <div class="col-card blue">
+        <div class="col-title">Neutral Adjustments</div>
+        <ul>
+          <li>Add a debit spread on the tested side to buy positive gamma</li>
+          <li>Adjustments cost something — weigh the price of defense</li>
+          <li>Delta-neutral tweaks keep you non-directional</li>
+          <li>Sometimes the best defense is to close and move on</li>
+        </ul>
+      </div>
+    </div>
+    <div class="key-idea"><strong>Bottom line:</strong> Defending buys positive gamma at a cost — spend it only when the trade is worth saving. A clean loss is better than a compounded one.</div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 7 · Lesson 3</div>
+    <h3>Events &amp; IV Crush</h3>
+    <p>Scheduled events distort volatility. Know when they help you and when they can hurt.</p>
+    <ul class="rule-list">
+      <li><span class="rule-icon">⚠️</span><div><strong>Earnings gap risk</strong>A big post-earnings move can jump straight through a wing overnight. Avoid holding into earnings — the event is known and priceable in advance.</div></li>
+      <li><span class="rule-icon">✅</span><div><strong>IV crush helps short-vega positions</strong>After an event, IV typically collapses. As a short-vega condor seller, you benefit when IV falls — even if price moves against you slightly.</div></li>
+      <li><span class="rule-icon">⚠️</span><div><strong>Legging-in risk</strong>Filling one spread at a time exposes you to moves between fills. Always enter all four legs as a single spread order.</div></li>
+      <li><span class="rule-icon">📅</span><div><strong>Plan the calendar</strong>Map all events before expiration and size — or skip — accordingly. An earnings date inside your DTE window is grounds for closing or avoiding the trade.</div></li>
+    </ul>
+  </div>
+
+  <!-- MODULE 8 -->
+  <div class="module-header">
+    <div class="module-num">8</div>
+    <div>
+      <p class="module-title">Portfolio &amp; Risk</p>
+      <p class="module-sub">Manage many trades as one book — and build to survive the tails.</p>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 8 · Lesson 1</div>
+    <h3>Portfolio-Level Risk</h3>
+    <p>A dozen condors behave like one position. <strong>Manage the book, not just each trade.</strong></p>
+    <div class="stat-row">
+      <div class="stat-box"><div class="sb-label">Beta-Weighted Delta</div><div class="sb-value">One number for the book</div><div class="sb-desc">Express every position's delta in index terms to see total directional exposure across all condors simultaneously.</div></div>
+      <div class="stat-box"><div class="sb-label">Buying-Power Limits</div><div class="sb-value">Cap total risk</div><div class="sb-desc">Set a max buying-power-reduction limit for the portfolio so one volatility shock can't sink the account in a single session.</div></div>
+      <div class="stat-box"><div class="sb-label">Correlated Vega</div><div class="sb-value">The hidden concentration</div><div class="sb-desc">A volatility spike hits many short-vega trades at once. Diversifying underlyings only helps if they're genuinely uncorrelated.</div></div>
+      <div class="stat-box"><div class="sb-label">Portfolio Margin</div><div class="sb-value">Capital efficiency</div><div class="sb-desc">For qualified accounts, hedged risk can free up capital. Check eligibility — it requires demonstrated options experience and minimum equity.</div></div>
+    </div>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lesson-label">Module 8 · Lesson 2</div>
+    <h3>Survival &amp; Discipline</h3>
+    <p><strong>Longevity beats brilliance.</strong> Size for the worst case and follow a written plan — every time, without exception.</p>
+    <div class="two-col">
+      <div class="col-card blue">
+        <div class="col-title">Risk of Ruin</div>
+        <ul>
+          <li>Size positions so a losing streak can't end the account</li>
+          <li>Kelly-style sizing: scale risk to your edge, then take a fraction</li>
+          <li>Assume the worst can happen — because sometimes it does</li>
+          <li>One large loss is survivable; catastrophic loss is not</li>
+        </ul>
+      </div>
+      <div class="col-card gold">
+        <div class="col-title">Pre-Defined Exits</div>
+        <ul>
+          <li>Profit target and DTE trigger set <em>before</em> entry — no improvising</li>
+          <li>Written plan removes emotion from mid-trade decisions</li>
+          <li>Section 1256 contracts (broad-based index options) often get 60/40 tax treatment</li>
+          <li>Review your plan quarterly — refine what the data shows</li>
+        </ul>
+      </div>
+    </div>
+    <div class="key-idea"><strong>The professional's edge:</strong> Not better entries — better exits. The discipline of following a pre-defined plan, trade after trade, is what compounds into long-term profitability.</div>
+  </div>
+
+  <!-- QUICK REF -->
+  <div class="module-header" style="background:linear-gradient(135deg,#3a2a08,#7a5a10)">
+    <div class="module-num" style="background:rgba(224,197,131,.15);border-color:var(--goldl);color:var(--goldl)">📋</div>
+    <div>
+      <p class="module-title">Quick Reference</p>
+      <p class="module-sub">Key terms at a glance — review before the exam.</p>
+    </div>
+  </div>
+
+  <div class="gloss-grid">
+    <div class="gloss-card"><div class="gloss-term">Skew</div><div class="gloss-def">Higher IV on OTM puts than on equidistant calls — structural in equity index options.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Broken Wing</div><div class="gloss-def">A condor with one spread wider than the other — reshapes risk toward one side deliberately.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Vomma</div><div class="gloss-def">Rate of change of vega as implied volatility moves. High vomma = vega expands rapidly in a vol spike.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Pin Risk</div><div class="gloss-def">Price finishing exactly at a short strike at expiration — creates assignment uncertainty.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Expected Move</div><div class="gloss-def">Likely price range implied by the ATM straddle. Sell short strikes outside this range for cushion.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Term Structure</div><div class="gloss-def">How implied volatility varies across expirations. Contango = farther-dated IV is higher.</div></div>
+    <div class="gloss-card"><div class="gloss-term">IV Crush</div><div class="gloss-def">A sharp drop in IV after an event — benefits short-vega positions like condors.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Beta-Weighting</div><div class="gloss-def">Expressing portfolio delta in index-equivalent terms to see total directional exposure.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Portfolio Margin</div><div class="gloss-def">Risk-based margin that can free up capital for qualified, hedged accounts.</div></div>
+    <div class="gloss-card"><div class="gloss-term">Risk of Ruin</div><div class="gloss-def">The odds of losing enough to end the account. Prevented by conservative position sizing.</div></div>
+  </div>
+
+  <!-- EXAM CTA -->
+  <div class="exam-cta">
+    <h2>You've Completed the Advanced Course</h2>
+    <p>25 questions · 60-minute time limit · Score 70% or higher to complete your Iron Condors certification</p>
+    <a class="btn-exam" href="/advanced">Start the Advanced Exam &nbsp;→</a>
+  </div>
+
+  <footer>
+    Iron Condors Academy · Advanced Course Lesson &nbsp;·&nbsp; <a href="/">All Courses</a> &nbsp;·&nbsp; <a href="/verify.html">Verify a certificate</a><br><br>
+    Educational content only. Options involve substantial risk and are not suitable for all investors.
+  </footer>
+
+</div>
+</body>
+</html>
