@@ -493,7 +493,11 @@ window.addEventListener('beforeunload',e=>{
   if(!document.getElementById('quiz').classList.contains('hidden')){e.preventDefault();e.returnValue='';}
 });
 
-loadExam();
+loadExam().then(function(){
+  if(new URLSearchParams(location.search).get('start')==='1'){
+    showNameSection();
+  }
+});
 </script>
 </body>
 </html>
