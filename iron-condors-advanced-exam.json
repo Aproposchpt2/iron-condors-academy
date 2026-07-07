@@ -1,0 +1,341 @@
+{
+  "title": "Iron Condors — Advanced Course Exam",
+  "course": "Iron Condors — Advanced Course (3 of 3)",
+  "level": "Advanced",
+  "certificateBody": "the Iron Condors Advanced course, demonstrating mastery of volatility skew, higher-order Greeks, portfolio risk, and disciplined execution.",
+  "nextCourse": null,
+  "version": "1.0",
+  "passingScore": 0.7,
+  "passingCorrect": 18,
+  "questionCount": 25,
+  "timeLimitMinutes": 60,
+  "shuffleQuestions": true,
+  "shuffleOptions": false,
+  "questions": [
+    {
+      "id": 1,
+      "topic": "Volatility skew",
+      "question": "In equity index options, volatility skew usually means out-of-the-money puts carry…",
+      "options": [
+        "Lower implied volatility than calls",
+        "Higher implied volatility than equidistant calls",
+        "Exactly the same IV as calls",
+        "No IV at all"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 2,
+      "topic": "Volatility skew",
+      "question": "Because of put skew, the put side of an iron condor tends to be…",
+      "options": [
+        "Cheaper than the call side",
+        "Richer, letting you sell it further out for the same credit",
+        "Impossible to trade",
+        "Always unprofitable"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 3,
+      "topic": "Structure",
+      "question": "A broken-wing iron condor is one where…",
+      "options": [
+        "Both spreads are equal width",
+        "One spread is made wider than the other",
+        "There are no long options",
+        "The legs share one strike"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 4,
+      "topic": "Structure",
+      "question": "A key benefit of a broken-wing structure is that it can…",
+      "options": [
+        "Guarantee a profit",
+        "Reduce or remove risk on one side",
+        "Eliminate all commissions",
+        "Double the theta automatically"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 5,
+      "topic": "Higher-order Greeks",
+      "question": "Vomma measures how an option's…",
+      "options": [
+        "Delta changes with price",
+        "Vega changes as implied volatility changes",
+        "Theta changes with time",
+        "Price changes with rates"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 6,
+      "topic": "Higher-order Greeks",
+      "question": "Gamma risk is most dangerous when the underlying sits at a short strike…",
+      "options": [
+        "Right after entry",
+        "Very close to expiration",
+        "With months to go",
+        "When IV is zero"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 7,
+      "topic": "Expiration risk",
+      "question": "Pin risk refers to the danger that price closes…",
+      "options": [
+        "Far from all strikes",
+        "Exactly at a short strike at expiration",
+        "Above the long call",
+        "Below the long put"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 8,
+      "topic": "Adjustments",
+      "question": "A delta-neutral adjustment aims to bring the position's net delta back toward…",
+      "options": [
+        "Zero",
+        "Its maximum",
+        "The stock price",
+        "The credit received"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 9,
+      "topic": "Taxes",
+      "question": "Broad-based index options (Section 1256 contracts) are generally taxed as…",
+      "options": [
+        "100% short-term",
+        "60% long-term / 40% short-term",
+        "Tax-free",
+        "Ordinary wages"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 10,
+      "topic": "Assignment",
+      "question": "Cash-settled European-style index options remove which risk?",
+      "options": [
+        "Volatility risk",
+        "Early assignment risk",
+        "Theta decay",
+        "Commission risk"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 11,
+      "topic": "Expected move",
+      "question": "The expected move to expiration is commonly estimated from the price of the…",
+      "options": [
+        "At-the-money straddle",
+        "Deep ITM call",
+        "Long wing",
+        "Dividend"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 12,
+      "topic": "Strike selection",
+      "question": "To raise probability of profit, short strikes are often placed…",
+      "options": [
+        "Inside the expected move",
+        "Outside the expected move",
+        "At the current price",
+        "At the long strikes"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 13,
+      "topic": "Term structure",
+      "question": "A volatility term structure in contango means longer-dated IV is…",
+      "options": [
+        "Lower than near-dated IV",
+        "Higher than near-dated IV",
+        "Always zero",
+        "Equal at every date"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 14,
+      "topic": "Event risk",
+      "question": "Holding an iron condor through an earnings report is risky mainly because…",
+      "options": [
+        "Theta stops working",
+        "A large gap can breach a wing",
+        "Commissions triple",
+        "The option expires early"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 15,
+      "topic": "Volatility",
+      "question": "A post-event IV crush tends to benefit an iron condor because it is…",
+      "options": [
+        "Long vega",
+        "Short vega",
+        "Delta-positive",
+        "Gamma-positive"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 16,
+      "topic": "Execution",
+      "question": "Legging into an iron condor one spread at a time introduces…",
+      "options": [
+        "Zero risk",
+        "Execution and directional risk between fills",
+        "Guaranteed better pricing",
+        "Automatic assignment"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 17,
+      "topic": "Adjustments",
+      "question": "Rolling a tested side for a credit means the net premium is…",
+      "options": [
+        "Paid out (debit)",
+        "Received (credit)",
+        "Always zero",
+        "A margin loan"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 18,
+      "topic": "Risk management",
+      "question": "Repeatedly rolling a losing position to avoid taking the loss tends to…",
+      "options": [
+        "Remove risk entirely",
+        "Increase total risk and potential loss",
+        "Guarantee recovery",
+        "Lower buying power used"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 19,
+      "topic": "Portfolio",
+      "question": "Managing many condors at once is best done by watching beta-weighted delta and…",
+      "options": [
+        "Buying-power limits",
+        "The lunch schedule",
+        "Only the ticker symbols",
+        "Dividend dates alone"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 20,
+      "topic": "Portfolio",
+      "question": "A portfolio of short-vega condors is vulnerable when a volatility spike hits…",
+      "options": [
+        "A single name only",
+        "Many positions at once (correlated losses)",
+        "Nothing at all",
+        "Only long stock"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 21,
+      "topic": "Risk sizing",
+      "question": "Position-sizing frameworks like the Kelly criterion are used to limit…",
+      "options": [
+        "Commission cost",
+        "Risk of ruin",
+        "Theta decay",
+        "Bid-ask spread"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 22,
+      "topic": "Capital",
+      "question": "Portfolio margin, versus Reg-T, generally lets a hedged condor book use…",
+      "options": [
+        "More capital",
+        "Less capital for the same risk",
+        "No margin at all",
+        "Only cash"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 23,
+      "topic": "Term structure",
+      "question": "A calendar or diagonal variant seeks to exploit differences in…",
+      "options": [
+        "Commission tiers",
+        "Implied volatility across expirations",
+        "Stock dividends",
+        "Share count"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 24,
+      "topic": "Adjustments",
+      "question": "Defending the tested side by adding a debit spread effectively buys…",
+      "options": [
+        "Positive gamma at a cost",
+        "Free insurance",
+        "Unlimited upside",
+        "A dividend"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 25,
+      "topic": "Discipline",
+      "question": "The hallmark of a professional condor trader's exit plan is that it is…",
+      "options": [
+        "Improvised each time",
+        "Pre-defined by profit target and DTE",
+        "Based on tips",
+        "Never to exit"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    }
+  ]
+}

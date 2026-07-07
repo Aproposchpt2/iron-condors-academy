@@ -1,0 +1,32 @@
+[[redirects]]
+  from = "/basic"
+  to = "/?exam=basic"
+  status = 302
+
+[[redirects]]
+  from = "/intermediate"
+  to = "/?exam=intermediate"
+  status = 302
+
+[[redirects]]
+  from = "/advanced"
+  to = "/?exam=advanced"
+  status = 302
+
+[[redirects]]
+  from = "/verify"
+  to = "/verify.html"
+  status = 302
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=300"

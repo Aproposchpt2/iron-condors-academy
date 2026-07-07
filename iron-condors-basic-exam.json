@@ -1,0 +1,341 @@
+{
+  "title": "Iron Condors — Basic Course Exam",
+  "course": "Iron Condors — Basic Course (1 of 3)",
+  "level": "Basic",
+  "certificateBody": "the Iron Condors Basic course, demonstrating a working command of options fundamentals, spread mechanics, and iron condor structure.",
+  "nextCourse": "Intermediate",
+  "version": "1.0",
+  "passingScore": 0.7,
+  "passingCorrect": 18,
+  "questionCount": 25,
+  "timeLimitMinutes": 45,
+  "shuffleQuestions": true,
+  "shuffleOptions": false,
+  "questions": [
+    {
+      "id": 1,
+      "topic": "Options basics",
+      "question": "A call option gives its holder the right to…",
+      "options": [
+        "Buy the stock at the strike price",
+        "Sell the stock at the strike price",
+        "Buy the stock only at expiration",
+        "Receive the stock's dividend"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 2,
+      "topic": "Options basics",
+      "question": "A put option gives its holder the right to…",
+      "options": [
+        "Buy the stock at the strike price",
+        "Sell the stock at the strike price",
+        "Short the market index",
+        "Collect interest income"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 3,
+      "topic": "Terminology",
+      "question": "An option's “premium” is best described as…",
+      "options": [
+        "The strike price",
+        "The price paid or received for the option",
+        "The maximum possible profit",
+        "The expiration date"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 4,
+      "topic": "Terminology",
+      "question": "The strike price of an option is…",
+      "options": [
+        "The current market price of the stock",
+        "The price at which it can be exercised",
+        "The premium that was paid",
+        "The broker's commission"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 5,
+      "topic": "Moneyness",
+      "question": "With the stock at $100, a $95 call is…",
+      "options": [
+        "Out of the money",
+        "At the money",
+        "In the money",
+        "Automatically expired"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 6,
+      "topic": "Moneyness",
+      "question": "With the stock at $100, a $105 call is…",
+      "options": [
+        "In the money",
+        "At the money",
+        "Out of the money",
+        "Already assigned"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 7,
+      "topic": "Moneyness",
+      "question": "An option whose strike equals the stock price is…",
+      "options": [
+        "In the money",
+        "At the money",
+        "Out of the money",
+        "Always worthless"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 8,
+      "topic": "Moneyness",
+      "question": "A put option is in the money when…",
+      "options": [
+        "The stock is above the strike",
+        "The stock equals the strike",
+        "The stock is below the strike",
+        "It never happens"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 9,
+      "topic": "Greeks",
+      "question": "Time decay of an option's value is measured by…",
+      "options": [
+        "Delta",
+        "Theta",
+        "Vega",
+        "Rho"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 10,
+      "topic": "Buying vs selling",
+      "question": "Selling an option to open a position means you…",
+      "options": [
+        "Pay premium and gain a right",
+        "Collect premium and take on an obligation",
+        "Close an existing trade",
+        "Buy the stock outright"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 11,
+      "topic": "Spreads",
+      "question": "A credit spread is opened for a…",
+      "options": [
+        "Net debit",
+        "Net credit",
+        "Zero net cost",
+        "Margin loan"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 12,
+      "topic": "Spreads",
+      "question": "A credit spread reaches maximum profit when…",
+      "options": [
+        "The stock moves sharply",
+        "Implied volatility spikes",
+        "The options expire worthless",
+        "You exercise early"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 13,
+      "topic": "Spreads",
+      "question": "A bull put spread profits when the stock…",
+      "options": [
+        "Stays above the short put strike",
+        "Falls below both puts",
+        "Pays a dividend",
+        "Gaps sharply lower"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 14,
+      "topic": "Spreads",
+      "question": "A bear call spread profits when the stock…",
+      "options": [
+        "Rallies above both calls",
+        "Stays below the short call strike",
+        "Splits its shares",
+        "Rises sharply"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 15,
+      "topic": "Iron condor structure",
+      "question": "An iron condor is constructed from…",
+      "options": [
+        "Two call spreads",
+        "Two put spreads",
+        "A bull put spread and a bear call spread",
+        "A single straddle"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 16,
+      "topic": "Iron condor structure",
+      "question": "How many legs does an iron condor have?",
+      "options": [
+        "Two",
+        "Three",
+        "Four",
+        "Five"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 17,
+      "topic": "Iron condor structure",
+      "question": "Listed from lowest to highest strike, the legs are…",
+      "options": [
+        "Buy put, sell put, sell call, buy call",
+        "Sell put, buy put, buy call, sell call",
+        "Buy call, sell call, sell put, buy put",
+        "Sell call, sell put, buy put, buy call"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 18,
+      "topic": "Iron condor structure",
+      "question": "The two short (sold) strikes define…",
+      "options": [
+        "The range you want price to stay within",
+        "The maximum loss",
+        "The commission cost",
+        "The dividend yield"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 19,
+      "topic": "Iron condor structure",
+      "question": "The two long (bought) strikes act as…",
+      "options": [
+        "Profit boosters",
+        "Protective wings that cap the loss",
+        "Dividend collectors",
+        "The short legs"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 20,
+      "topic": "The math",
+      "question": "Maximum profit on an iron condor equals…",
+      "options": [
+        "Wing width × 100",
+        "The net credit received (× 100)",
+        "An unlimited amount",
+        "The strike price"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 21,
+      "topic": "The math",
+      "question": "With $5 wings and a $1.20 credit, the max loss per contract is…",
+      "options": [
+        "$120",
+        "$380",
+        "$500",
+        "Unlimited"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 22,
+      "topic": "The math",
+      "question": "With $5 wings and a $1.20 credit, the max profit per contract is…",
+      "options": [
+        "$120",
+        "$380",
+        "$500",
+        "$620"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 23,
+      "topic": "The math",
+      "question": "Break-even prices are found by…",
+      "options": [
+        "Long strike ± wing width",
+        "Short strike ± net credit",
+        "Strike × 100",
+        "Premium ÷ 2"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 24,
+      "topic": "When to trade",
+      "question": "An iron condor is ideal when you expect the stock to…",
+      "options": [
+        "Trend strongly higher",
+        "Sell off quickly",
+        "Stay range-bound",
+        "Pay a large dividend"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 25,
+      "topic": "When to trade",
+      "question": "A good time to use an iron condor is when implied volatility is…",
+      "options": [
+        "Low and rising",
+        "High and expected to fall",
+        "Exactly zero",
+        "Not relevant"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    }
+  ]
+}

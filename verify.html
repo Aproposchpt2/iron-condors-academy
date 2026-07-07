@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Certificate Verification — Iron Condors Academy</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#0B1220; --slate:#32405C; --body:#4A5468; --mute:#6B7280;
+    --line:#E4E0D3; --panel:#F4F1E8; --panel2:#FAF8F3;
+    --teal:#0F2A6A; --tealb:#1E3F8F; --tealx:#E8EAF3;
+    --gold:#B8923E; --goldl:#E0C583; --goldx:#FBF3DE;
+    --green:#0D7A4C; --greenx:#DEF3E7; --rose:#B0264A; --rosex:#FBE4EA;
+    --amber:#B8923E;
+    --radius:14px; --shadow:0 10px 32px rgba(15,26,42,.12);
+    --serif:'Bodoni Moda',Georgia,'Times New Roman',serif;
+    --accent-serif:'Cormorant',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Jost',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--panel2);
+    background-image:radial-gradient(circle at 12% 8%, rgba(184,146,62,.07), transparent 42%),radial-gradient(circle at 92% 4%, rgba(15,42,106,.06), transparent 38%);
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:44px 16px 64px}
+  .kicker{color:var(--gold);font-family:var(--accent-serif);font-style:italic;font-weight:600;font-size:.94rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.15rem;line-height:1.16;margin:0 0 14px;color:var(--ink)}
+  .goldrule{display:flex;align-items:center;gap:10px;margin:0 0 18px;max-width:340px}
+  .goldrule::before,.goldrule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .goldrule::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .goldrule i{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex:none}
+  .sub{color:var(--body);font-size:.98rem;margin:0 0 4px}
+  .panel{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px 18px;margin:20px 0;overflow:hidden}
+  .panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--teal))}
+  label{display:block;font-size:.82rem;font-weight:700;color:var(--slate);margin-bottom:8px}
+  textarea{width:100%;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem;color:var(--ink);
+    padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--panel2);resize:vertical;min-height:76px;transition:border-color .12s ease}
+  textarea:focus{outline:none;border-color:var(--teal);background:#fff}
+  .row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  button{font-family:'Jost',inherit;font-size:.9rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border-radius:9px;border:1.5px solid var(--teal);padding:12px 22px;cursor:pointer;transition:all .15s ease}
+  .btn-primary{background:linear-gradient(135deg,var(--teal),var(--tealb));color:#fff;border-color:var(--teal);box-shadow:0 6px 18px rgba(15,42,106,.28)}
+  .btn-primary:hover{background:linear-gradient(135deg,#0a1e4d,var(--teal));box-shadow:0 8px 22px rgba(15,42,106,.38);transform:translateY(-1px)}
+  .btn-ghost{background:#fff;color:var(--teal)}
+  .btn-ghost:hover{background:var(--tealx)}
+  .result{margin-top:20px;display:none}
+  .result.show{display:block}
+  .banner{display:flex;align-items:center;gap:14px;border-radius:var(--radius);padding:18px 20px}
+  .banner .mark{flex:none;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:#fff}
+  .banner .big{font-family:var(--serif);font-size:1.25rem;font-weight:700;line-height:1.15}
+  .banner .small{font-size:.86rem}
+  .valid{background:var(--greenx);border:1.5px solid var(--green)}
+  .valid .mark{background:var(--green)} .valid .big{color:#065f46} .valid .small{color:#047857}
+  .invalid{background:var(--rosex);border:1.5px solid var(--rose)}
+  .invalid .mark{background:var(--rose)} .invalid .big{color:#9f1239} .invalid .small{color:#be123c}
+  .details{margin-top:16px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .details .drow{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;font-size:.94rem;border-top:1px solid var(--line)}
+  .details .drow:first-child{border-top:none}
+  .details .k{color:var(--mute);font-weight:600}
+  .details .v{color:var(--ink);font-weight:700;text-align:right;word-break:break-word}
+  .details .v.tealv{color:var(--teal)}
+  .idbox{margin-top:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.8rem;color:var(--mute);
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;word-break:break-all}
+  .note{font-size:.82rem;color:var(--mute);margin:10px 2px 0}
+  footer.foot{margin-top:34px;text-align:center;background:linear-gradient(160deg,#0C2258,#0A1A45);color:#C9CEDD;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;padding:24px 16px 26px;border-radius:var(--radius);position:relative;overflow:hidden}
+  footer.foot::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  @media (max-width:520px){h1{font-size:1.6rem} button{width:100%}}
+
+  :focus-visible{outline:3px solid rgba(184,146,62,.45);outline-offset:3px}
+  a{color:var(--teal);text-decoration-thickness:1.5px;text-underline-offset:3px}
+  .site-header{background:linear-gradient(160deg,#0A1A45,#0F2A6A 55%,#0C2258);border-bottom:2px solid var(--gold);box-shadow:0 4px 24px rgba(10,20,50,.35);position:relative}
+  .site-header::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .site-header-inner{max-width:900px;margin:0 auto;padding:20px 18px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:#fff}
+  .brand-mark{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 32% 28%,#1E3F8F,#0A1A45 70%);color:var(--goldl);font-weight:700;font-family:var(--serif);font-size:1.15rem;box-shadow:0 0 0 2px var(--gold),0 0 0 5px rgba(184,146,62,.25),0 8px 20px rgba(0,0,0,.35);border:1px solid rgba(224,197,131,.5)}
+  .brand-text strong{display:block;font-family:var(--serif);font-weight:700;font-size:1.14rem;color:#fff}.brand-text span{display:block;color:var(--goldl);font-size:.76rem;font-family:var(--accent-serif);font-style:italic}
+  .back-link{font-size:.85rem;font-weight:600;text-decoration:none;padding:8px 12px;border-radius:8px;color:#EDEBE0;border:1px solid transparent}.back-link:hover{background:rgba(224,197,131,.12);border-color:rgba(224,197,131,.4);color:var(--goldl)}
+  .notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 14px;font-size:.82rem;margin-top:14px}
+  .footer-links{margin-top:10px;text-transform:none;letter-spacing:normal;font-size:.82rem}
+  .footer-links a{color:var(--goldl);font-weight:600}
+  .footer-links a:hover{color:#fff}
+  @media(max-width:560px){.site-header-inner{align-items:flex-start;flex-direction:column}.back-link{padding-left:0}}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/?exam=basic" aria-label="Iron Condors Academy exams">
+      <span class="brand-mark" aria-hidden="true">IC</span>
+      <span class="brand-text"><strong>Iron Condors Academy</strong><span>Defined-risk options certification</span></span>
+    </a>
+    <a class="back-link" href="/?exam=basic">← Return to exams</a>
+  </div>
+</header>
+<div class="wrap">
+  <p class="kicker">Iron Condors Academy · Certificate Verification</p>
+  <h1>Verify a Certificate</h1>
+  <div class="goldrule" aria-hidden="true"><i></i></div>
+  <p class="sub">Every certificate carries an ID that encodes the recipient, course, score, and date. Paste the ID below—or open a <code>?id=</code> link—to confirm that its embedded details pass the site’s integrity check.</p>
+
+  <div class="panel">
+    <label for="idInput">Certificate ID</label>
+    <textarea id="idInput" placeholder="IC-BAS-…"></textarea>
+    <div class="row">
+      <button class="btn-primary" id="verifyBtn">Verify certificate</button>
+      <button class="btn-ghost" id="clearBtn">Clear</button>
+    </div>
+    <p class="note">The check runs entirely in your browser; no personal data is uploaded. An intact checksum detects mistyped or edited certificate IDs.</p>
+    <div class="notice"><strong>Verification scope:</strong> This static checker validates the ID format and embedded checksum. A server-backed issuer registry or digital signature is required for cryptographic proof that a certificate was issued by the Academy.</div>
+  </div>
+
+  <div class="result" id="result" aria-live="polite"></div>
+
+  <footer class="foot">Iron Condors Academy · Certificate Verification<div class="footer-links"><a href="/?exam=basic">Return to certification exams</a></div></footer>
+</div>
+
+<script>
+/* ---- Shared self-verifying scheme (mirrors index.html) ---- */
+function b64urlDecode(str){
+  str = String(str).replace(/-/g,'+').replace(/_/g,'/');
+  while(str.length % 4) str += '=';
+  return decodeURIComponent(escape(atob(str)));
+}
+function certChecksum(str){
+  let h = 2166136261 >>> 0;
+  for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h,16777619) >>> 0; }
+  return h.toString(36).toUpperCase().padStart(7,'0').slice(-4);
+}
+// ID shape: IC-<LVL>-<base64url payload>-<checksum>. The payload may itself contain
+// '-' (base64url), so we peel the fixed prefix and the trailing checksum instead of a naive split.
+function parseCertId(raw){
+  const id = String(raw||'').trim();
+  const parts = id.split('-');
+  if(parts.length < 4 || parts[0].toUpperCase() !== 'IC') return { ok:false, reason:'This does not look like an Iron Condors certificate ID.' };
+  const ck = parts[parts.length-1];
+  const body = parts.slice(2, parts.length-1).join('-');
+  if(!body) return { ok:false, reason:'The certificate ID is incomplete.' };
+  if(certChecksum(body) !== ck) return { ok:false, reason:'Checksum mismatch — this ID is altered or mistyped.' };
+  let payload;
+  try{ payload = b64urlDecode(body); }
+  catch(e){ return { ok:false, reason:'The certificate ID could not be decoded.' }; }
+  const f = payload.split('|');
+  if(f[0] !== 'v1' || f.length < 8) return { ok:false, reason:'Unsupported certificate format.' };
+  const pct=parseInt(f[4],10), correct=parseInt(f[5],10), total=parseInt(f[6],10);
+  if(!f[1] || !f[2] || !Number.isFinite(pct) || !Number.isFinite(correct) || !Number.isFinite(total) ||
+     total < 1 || correct < 0 || correct > total || pct < 0 || pct > 100){
+    return { ok:false, reason:'The certificate details are incomplete or invalid.' };
+  }
+  if(Math.abs(Math.round(correct/total*100)-pct) > 1){
+    return { ok:false, reason:'The score values in this ID are inconsistent.' };
+  }
+  return { ok:true, id, name:f[1], course:f[2], level:f[3], pct, correct, total, date:f[7] };
+}
+
+function fmtDate(iso){
+  const d = new Date(iso + 'T00:00:00');
+  if(isNaN(d)) return iso;
+  return d.toLocaleDateString(undefined, { year:'numeric', month:'long', day:'numeric' });
+}
+
+function render(res, rawId){
+  const el = document.getElementById('result');
+  el.classList.add('show');
+  if(!res.ok){
+    el.innerHTML =
+      '<div class="banner invalid"><div class="mark">✕</div>'+
+      '<div><div class="big">Not verified</div><div class="small">'+res.reason+'</div></div></div>'+
+      (rawId ? '<div class="idbox">'+escapeHtml(rawId)+'</div>' : '');
+    return;
+  }
+  el.innerHTML =
+    '<div class="banner valid"><div class="mark">✓</div>'+
+    '<div><div class="big">Certificate ID verified</div>'+
+    '<div class="small">The embedded details passed the checksum and consistency checks.</div></div></div>'+
+    '<div class="details">'+
+      drow('Recipient', escapeHtml(res.name), true)+
+      drow('Course', escapeHtml(res.course), false)+
+      drow('Level', escapeHtml(res.level||'—'), false)+
+      drow('Result', 'Passed · '+res.pct+'% ('+res.correct+' of '+res.total+' correct)', false)+
+      drow('Date of completion', fmtDate(res.date), false)+
+    '</div>'+
+    '<div class="idbox">Certificate ID: '+escapeHtml(res.id)+'</div>';
+}
+function drow(k,v,teal){ return '<div class="drow"><span class="k">'+k+'</span><span class="v'+(teal?' tealv':'')+'">'+v+'</span></div>'; }
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function run(){
+  const raw = document.getElementById('idInput').value;
+  if(!raw.trim()){ document.getElementById('result').classList.remove('show'); return; }
+  render(parseCertId(raw), raw.trim());
+}
+
+document.getElementById('verifyBtn').addEventListener('click', run);
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  document.getElementById('idInput').value='';
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('idInput').focus();
+});
+document.getElementById('idInput').addEventListener('keydown', e=>{
+  if((e.key==='Enter' && (e.metaKey||e.ctrlKey))){ run(); }
+});
+
+// Auto-verify from ?id= deep link (used by the certificate footer / records URLs).
+(function(){
+  const q = new URLSearchParams(location.search).get('id');
+  if(q){ document.getElementById('idInput').value = q; run(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+{
+  "title": "Iron Condors — Intermediate Course Exam",
+  "course": "Iron Condors — Intermediate Course (2 of 3)",
+  "level": "Intermediate",
+  "certificateBody": "the Iron Condors Intermediate course, demonstrating command of probability, Greeks-based position management, and trade adjustment.",
+  "nextCourse": "Advanced",
+  "version": "1.0",
+  "passingScore": 0.7,
+  "passingCorrect": 18,
+  "questionCount": 25,
+  "timeLimitMinutes": 45,
+  "shuffleQuestions": true,
+  "shuffleOptions": false,
+  "questions": [
+    {
+      "id": 1,
+      "topic": "Position Greeks",
+      "question": "At entry, a balanced iron condor's net delta is closest to…",
+      "options": [
+        "Strongly positive",
+        "Strongly negative",
+        "Near zero (neutral)",
+        "Exactly +1.00"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 2,
+      "topic": "Position Greeks",
+      "question": "An iron condor is a short-vega position, meaning it profits when implied volatility…",
+      "options": [
+        "Rises sharply",
+        "Falls",
+        "Stays pinned",
+        "Doubles"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 3,
+      "topic": "Position Greeks",
+      "question": "The theta of a healthy iron condor is…",
+      "options": [
+        "Negative — it loses value daily",
+        "Zero",
+        "Positive — it gains from time decay",
+        "Undefined"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 4,
+      "topic": "Position Greeks",
+      "question": "The main gamma risk of an iron condor appears when price sits…",
+      "options": [
+        "Far from every strike",
+        "Near a short strike close to expiration",
+        "At the long wings",
+        "Only at trade entry"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 5,
+      "topic": "Probability",
+      "question": "A short option near 16 delta has roughly what chance of finishing out of the money?",
+      "options": [
+        "About 50%",
+        "About 68%",
+        "About 84%",
+        "About 100%"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 6,
+      "topic": "Probability",
+      "question": "Selling the 16-delta strikes on each side places the short strikes near…",
+      "options": [
+        "The current price",
+        "One standard deviation out",
+        "The long wings",
+        "The break-even points"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 7,
+      "topic": "Probability",
+      "question": "An option's delta is often used as a rough proxy for…",
+      "options": [
+        "The commission",
+        "The probability it expires in the money",
+        "The bid-ask spread",
+        "The dividend"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 8,
+      "topic": "Volatility",
+      "question": "IV rank tells you how current implied volatility compares to…",
+      "options": [
+        "The stock's P/E ratio",
+        "Its own range over the past year",
+        "The risk-free rate",
+        "The option's delta"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 9,
+      "topic": "Volatility",
+      "question": "The best environment to open a premium-selling iron condor is when IV rank is…",
+      "options": [
+        "Low",
+        "High",
+        "Exactly 50",
+        "Irrelevant"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 10,
+      "topic": "Trade timing",
+      "question": "A common days-to-expiration window for opening iron condors is…",
+      "options": [
+        "1–3 DTE",
+        "7–10 DTE",
+        "30–45 DTE",
+        "180+ DTE"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 11,
+      "topic": "Management",
+      "question": "A widely used profit-taking target is to close the trade at about…",
+      "options": [
+        "10% of max profit",
+        "50% of max profit",
+        "100% of max profit",
+        "Only at expiration"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 12,
+      "topic": "Management",
+      "question": "A common time-based rule is to manage or close the position around…",
+      "options": [
+        "21 days to expiration",
+        "1 day after entry",
+        "90 DTE",
+        "Never"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 13,
+      "topic": "Adjustments",
+      "question": "When one side is threatened, a frequent adjustment is to roll the untested side…",
+      "options": [
+        "Further out for an additional credit",
+        "Closer for a debit",
+        "Into a naked call",
+        "To a longer stock position"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 14,
+      "topic": "Capital",
+      "question": "Buying-power reduction for a defined-risk iron condor is approximately equal to…",
+      "options": [
+        "The net credit",
+        "The max loss",
+        "The stock price",
+        "Zero"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 15,
+      "topic": "Structure choices",
+      "question": "Choosing wider wings on an iron condor generally…",
+      "options": [
+        "Lowers both credit and risk",
+        "Raises the credit but also the max loss",
+        "Removes all risk",
+        "Has no effect"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 16,
+      "topic": "Probability",
+      "question": "A typical probability-of-profit range targeted for iron condors is…",
+      "options": [
+        "10–20%",
+        "35–45%",
+        "65–85%",
+        "Always 100%"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 17,
+      "topic": "Trade profile",
+      "question": "The payoff profile of an iron condor is best described as…",
+      "options": [
+        "Win rarely, win big",
+        "Win often, with small capped gains",
+        "Unlimited upside",
+        "Guaranteed profit"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 18,
+      "topic": "Structure choices",
+      "question": "Placing the short strikes closer to the money makes the trade…",
+      "options": [
+        "Higher credit but lower probability of profit",
+        "Risk-free",
+        "Impossible to fill",
+        "Delta-positive by design"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    },
+    {
+      "id": 19,
+      "topic": "Assignment risk",
+      "question": "Early assignment on an American-style short option is most likely when it becomes…",
+      "options": [
+        "Slightly out of the money",
+        "Deep in the money (often near a dividend)",
+        "At the money",
+        "Newly opened"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 20,
+      "topic": "Portfolio",
+      "question": "Beta-weighting your positions to an index lets you see your…",
+      "options": [
+        "Total commissions",
+        "Aggregate portfolio delta exposure",
+        "Average holding time",
+        "Tax bracket"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 21,
+      "topic": "Volatility",
+      "question": "A sudden IV expansion after you open the trade typically causes a…",
+      "options": [
+        "Permanent realized loss",
+        "Temporary unrealized loss for the short-vega position",
+        "Guaranteed gain",
+        "Margin call by rule"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 22,
+      "topic": "Adjustments",
+      "question": "Rolling an iron condor means to…",
+      "options": [
+        "Exercise the long legs",
+        "Close the current position and reopen it at new strikes or dates",
+        "Add stock",
+        "Convert to a straddle"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 23,
+      "topic": "Structure",
+      "question": "Compared with a short strangle, an iron condor's max loss is…",
+      "options": [
+        "Unlimited",
+        "Undefined",
+        "Capped and known in advance",
+        "Always larger"
+      ],
+      "answerIndex": 2,
+      "answer": "C"
+    },
+    {
+      "id": 24,
+      "topic": "The math",
+      "question": "For a $5-wide iron condor collecting $1.60 credit, the max loss per contract is…",
+      "options": [
+        "$160",
+        "$340",
+        "$500",
+        "Unlimited"
+      ],
+      "answerIndex": 1,
+      "answer": "B"
+    },
+    {
+      "id": 25,
+      "topic": "Risk sizing",
+      "question": "A prudent per-trade risk allocation for one iron condor is about…",
+      "options": [
+        "1–5% of the account",
+        "50% of the account",
+        "The entire account",
+        "It does not matter"
+      ],
+      "answerIndex": 0,
+      "answer": "A"
+    }
+  ]
+}
