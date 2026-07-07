@@ -1,16 +1,16 @@
 [[redirects]]
   from = "/basic"
-  to = "/?exam=basic"
+  to = "/basic.html"
   status = 302
 
 [[redirects]]
   from = "/intermediate"
-  to = "/?exam=intermediate"
+  to = "/intermediate.html"
   status = 302
 
 [[redirects]]
   from = "/advanced"
-  to = "/?exam=advanced"
+  to = "/advanced.html"
   status = 302
 
 [[redirects]]

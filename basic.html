@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Basic Course — Iron Condors Academy</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#0B1220;--slate:#32405C;--body:#4A5468;--mute:#6B7280;
+    --line:#E4E0D3;--panel:#F4F1E8;--panel2:#FAF8F3;
+    --teal:#0F2A6A;--tealb:#1E3F8F;--tealx:#E8EAF3;
+    --gold:#B8923E;--goldl:#E0C583;--goldx:#FBF3DE;
+    --green:#0D7A4C;--greenx:#DEF3E7;--rose:#B0264A;--rosex:#FBE4EA;
+    --radius:14px;--shadow:0 10px 32px rgba(15,26,42,.12);
+    --serif:'Bodoni Moda',Georgia,serif;--accent-serif:'Cormorant',Georgia,serif;
+  }
+  *{box-sizing:border-box}html,body{margin:0;padding:0}
+  body{font-family:'Jost',-apple-system,sans-serif;color:var(--ink);background:var(--panel2);
+    background-image:radial-gradient(circle at 12% 8%,rgba(184,146,62,.07),transparent 42%),radial-gradient(circle at 92% 4%,rgba(15,42,106,.06),transparent 38%);
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:20px 16px 64px}
+  /* HEADER */
+  .site-header{background:linear-gradient(160deg,#0A1A45,#0F2A6A 55%,#0C2258);border-bottom:2px solid var(--gold);box-shadow:0 4px 24px rgba(10,20,50,.35);position:relative}
+  .site-header::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .site-header-inner{max-width:820px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+  .brand-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 32% 28%,#1E3F8F,#0A1A45 70%);color:var(--goldl);font-weight:700;font-family:var(--serif);font-size:1rem;box-shadow:0 0 0 2px var(--gold),0 0 0 4px rgba(184,146,62,.2)}
+  .brand-text strong{display:block;font-family:var(--serif);font-size:1.05rem;color:#fff}
+  .brand-text span{display:block;color:var(--goldl);font-size:.72rem;font-family:var(--accent-serif);font-style:italic}
+  .header-links{display:flex;gap:6px;align-items:center}
+  .header-link{font-size:.78rem;font-weight:600;color:rgba(255,255,255,.65);text-decoration:none;padding:6px 11px;border-radius:7px;border:1px solid transparent;transition:.15s}
+  .header-link:hover{background:rgba(224,197,131,.12);border-color:rgba(224,197,131,.35);color:var(--goldl)}
+  .header-link.back{color:rgba(255,255,255,.5)}
+  /* COURSE OVERVIEW */
+  .course-hero{padding:36px 0 28px;border-bottom:1px solid var(--line);margin-bottom:28px}
+  .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+  .breadcrumb a{color:var(--mute);text-decoration:none}
+  .breadcrumb a:hover{color:var(--teal)}
+  .breadcrumb-sep{color:var(--line)}
+  .level-badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 14px;border-radius:999px;background:var(--greenx);color:var(--green);border:1px solid rgba(13,122,76,.2);margin-bottom:12px}
+  .course-hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.7rem);font-weight:700;color:var(--ink);margin:0 0 12px;line-height:1.1}
+  .course-hero .sub{color:var(--body);font-size:1rem;max-width:58ch;line-height:1.7;margin:0 0 18px}
+  .course-stats{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+  .stat-chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.8rem;color:var(--slate);font-weight:600;display:flex;align-items:center;gap:5px;box-shadow:0 2px 6px rgba(15,23,42,.05)}
+  /* TOPICS */
+  .section-title{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--ink);margin:0 0 16px}
+  .topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:28px}
+  .topic-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start}
+  .topic-icon{font-size:1.1rem;flex:none;line-height:1.4}
+  .topic-text{font-size:.87rem;color:var(--body);line-height:1.5;font-weight:500}
+  /* WHAT YOU LEARN */
+  .learn-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;margin-bottom:28px;position:relative;overflow:hidden}
+  .learn-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+  .learn-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .learn-list li{display:flex;gap:12px;align-items:flex-start;font-size:.92rem;color:var(--body);line-height:1.55}
+  .learn-list li::before{content:'✓';color:var(--green);font-weight:700;flex:none;margin-top:.05em}
+  /* EXAM CTA */
+  .exam-cta-block{background:linear-gradient(135deg,#0A1A45,#0F2A6A);border-radius:var(--radius);padding:36px 28px;text-align:center;margin:40px 0 0;position:relative;overflow:hidden}
+  .exam-cta-block::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .exam-cta-block h2{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:#fff;margin:0 0 8px}
+  .exam-cta-block p{color:rgba(255,255,255,.7);font-size:.95rem;margin:0 0 24px;line-height:1.6}
+  .btn-start-exam{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--goldl),var(--gold));color:#0A1A45;font-family:var(--serif);font-size:1.1rem;font-weight:700;padding:16px 36px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(184,146,62,.4);transition:.2s;text-decoration:none;letter-spacing:.02em}
+  .btn-start-exam:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,146,62,.5)}
+  /* NAME BOX */
+  .namebox{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin:20px 0 0;overflow:hidden}
+  .namebox::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--teal))}
+  .namebox label{display:block;font-size:.82rem;font-weight:700;color:var(--slate);margin-bottom:8px}
+  .namebox input{width:100%;font-family:inherit;font-size:1.04rem;color:var(--ink);padding:13px 15px;border:1.5px solid var(--line);border-radius:10px;background:var(--panel2);transition:.12s}
+  .namebox input:focus{outline:none;border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(184,146,62,.18)}
+  .namebox input.invalid{border-color:var(--rose);background:var(--rosex)}
+  .namehint{margin:8px 0 0;font-size:.78rem;min-height:1.1em}
+  .namehint.err{color:var(--rose);font-weight:600}
+  .btn-begin{margin-top:14px;width:100%;background:linear-gradient(135deg,var(--teal),var(--tealb));color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:.92rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:14px 24px;cursor:pointer;transition:.15s}
+  .btn-begin:hover{filter:brightness(1.1)}
+  /* QUIZ */
+  .progress-shell{position:sticky;top:6px;background:var(--panel2);padding:12px 0 8px;z-index:10}
+  .progress-meta{display:flex;justify-content:space-between;font-size:.8rem;color:var(--mute);margin-bottom:6px;font-weight:600}
+  .bar{height:10px;background:var(--line);border-radius:999px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(15,23,42,.08)}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--gold));box-shadow:0 0 10px rgba(184,146,62,.5);transition:width .3s ease}
+  .card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px 16px;margin:14px 0;overflow:hidden}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+  .card .qnum{display:inline-block;background:var(--teal);color:#fff;font-weight:700;font-size:.78rem;padding:4px 10px;border-radius:8px;margin-bottom:10px;border:1px solid var(--goldl)}
+  .card .qtopic{color:var(--mute);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-left:8px}
+  .qtext{font-size:1.06rem;font-weight:700;margin:2px 0 14px}
+  .opts{display:grid;gap:10px}
+  .opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);background:var(--panel2);border-radius:10px;padding:12px 14px;cursor:pointer;transition:.12s;font-size:.98rem}
+  .opt:hover{border-color:var(--tealb);background:#fff}
+  .opt input{position:absolute;opacity:0;width:0;height:0}
+  .opt .letter{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:var(--slate);background:#fff}
+  .opt.selected{border-color:var(--teal);background:var(--tealx)}
+  .opt.selected .letter{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .opt.correct{border-color:var(--green);background:var(--greenx)}
+  .opt.correct .letter{background:var(--green);color:#fff;border-color:var(--green)}
+  .opt.wrong{border-color:var(--rose);background:var(--rosex)}
+  .opt.wrong .letter{background:var(--rose);color:#fff;border-color:var(--rose)}
+  .tag{margin-left:auto;font-size:.78rem;font-weight:700}
+  .tag.ok{color:var(--green)}.tag.no{color:var(--rose)}
+  .nav{display:flex;gap:10px;justify-content:space-between;margin-top:18px}
+  button{position:relative;font-family:'Jost',inherit;font-size:.92rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border-radius:9px;border:1.5px solid var(--teal);padding:13px 24px;cursor:pointer;transition:.15s;overflow:hidden}
+  .btn-primary{background:linear-gradient(135deg,var(--teal),var(--tealb));color:#fff;border-color:var(--teal);box-shadow:0 6px 18px rgba(15,42,106,.28)}
+  .btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px)}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+  .btn-ghost{background:#fff;color:var(--teal)}
+  .btn-ghost:hover{background:var(--tealx)}
+  .btn-ghost:disabled{opacity:.4;cursor:not-allowed}
+  .btn-gold{background:linear-gradient(135deg,var(--goldl),var(--gold));color:#2A1F08;border-color:var(--gold);box-shadow:0 6px 18px rgba(184,146,62,.35)}
+  .btn-gold:hover{filter:brightness(1.05);transform:translateY(-1px)}
+  /* RESULT */
+  .result{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 22px 28px;text-align:center;margin:14px 0;overflow:hidden}
+  .result::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--teal))}
+  .score-ring{width:158px;height:158px;border-radius:50%;margin:6px auto 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 0 0 3px #fff,0 0 0 5px var(--goldl),0 10px 28px rgba(15,26,42,.18)}
+  .score-ring .pct{font-family:var(--serif);font-size:2.5rem;font-weight:700;line-height:1}
+  .score-ring .frac{font-size:.9rem;opacity:.92;font-weight:600}
+  .verdict{font-family:var(--serif);font-size:1.6rem;font-weight:700;margin:4px 0}
+  .verdict.pass{color:var(--green)}.verdict.fail{color:var(--rose)}
+  .result p{color:var(--body);margin:6px auto 0;max-width:520px}
+  .result .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  /* UTILS */
+  .hidden{display:none!important}
+  .timer{font-variant-numeric:tabular-nums}
+  footer.foot{margin-top:40px;text-align:center;background:linear-gradient(160deg,#0C2258,#0A1A45);color:#C9CEDD;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;padding:26px 16px 30px;border-radius:var(--radius);position:relative;overflow:hidden}
+  footer.foot::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--goldl),var(--gold),var(--goldl),transparent)}
+  .footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:10px;text-transform:none;letter-spacing:normal;font-size:.82rem}
+  .footer-links a{text-decoration:none;color:var(--goldl);font-weight:600}
+  @media(max-width:520px){.qtext{font-size:1rem}.opt{font-size:.94rem;padding:11px 12px}button{width:100%}.nav{flex-direction:column-reverse}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">IC</span>
+      <span class="brand-text"><strong>Iron Condors Academy</strong><span>Defined-risk options certification</span></span>
+    </a>
+    <div class="header-links">
+      <a class="header-link back" href="/">← All Courses</a>
+      <a class="header-link" href="/verify.html">Verify certificate</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- COURSE OVERVIEW (shown first) -->
+  <section id="course-overview">
+    <div class="course-hero">
+      <div class="breadcrumb">
+        <a href="/">Home</a><span class="breadcrumb-sep">›</span><span>Basic Course</span>
+      </div>
+      <span class="level-badge">Course 1 of 3 · Basic</span>
+      <h1>Iron Condors — Basic Course</h1>
+      <p class="sub">The foundation of the Iron Condor strategy, built from the ground up. You will learn how options work, how spreads are constructed, and how a complete Iron Condor is structured, priced, and evaluated.</p>
+      <div class="course-stats">
+        <span class="stat-chip">📋 25 Questions</span>
+        <span class="stat-chip">⏱ 45-minute exam</span>
+        <span class="stat-chip">✅ 70% to pass (18/25)</span>
+        <span class="stat-chip">🏆 Certificate on pass</span>
+      </div>
+    </div>
+
+    <h2 class="section-title">What This Course Covers</h2>
+    <div class="topics-grid">
+      <div class="topic-card"><span class="topic-icon">📌</span><span class="topic-text">Options basics — calls, puts, premiums, and strike prices</span></div>
+      <div class="topic-card"><span class="topic-icon">📌</span><span class="topic-text">Moneyness — ITM, ATM, and OTM options explained</span></div>
+      <div class="topic-card"><span class="topic-icon">📌</span><span class="topic-text">The Greeks — understanding theta (time decay)</span></div>
+      <div class="topic-card"><span class="topic-icon">📌</span><span class="topic-text">Buying vs. selling — obligations and rights</span></div>
+      <div class="topic-card"><span class="topic-icon">📌</span><span class="topic-text">Credit spreads — bull put and bear call structures</span></div>
+      <div class="topic-card"><span class="topic-icon">📌</span><span class="topic-text">Iron Condor structure — all four legs explained</span></div>
+      <div class="topic-card"><span class="topic-icon">📌</span><span class="topic-text">Max profit, max loss, and break-even calculations</span></div>
+      <div class="topic-card"><span class="topic-icon">📌</span><span class="topic-text">When to use an Iron Condor — market conditions</span></div>
+    </div>
+
+    <div class="learn-box">
+      <h2 class="section-title">By the End of This Course You Will Know How To</h2>
+      <ul class="learn-list">
+        <li>Identify the four legs of an Iron Condor and explain the role of each</li>
+        <li>Calculate maximum profit, maximum loss, and both break-even prices</li>
+        <li>Determine whether an option is in-the-money, at-the-money, or out-of-the-money</li>
+        <li>Explain why Iron Condor sellers benefit from time decay (theta)</li>
+        <li>Recognize the ideal market conditions for deploying an Iron Condor</li>
+        <li>Distinguish between a credit spread (seller) and a debit spread (buyer)</li>
+      </ul>
+    </div>
+
+    <!-- START EXAM CTA -->
+    <div class="exam-cta-block">
+      <h2>Ready to Take the Exam?</h2>
+      <p>25 questions · 45-minute time limit · Score 70% or higher to earn your Basic Certificate</p>
+      <a class="btn-start-exam" href="#" id="showNameBtn">Start the Basic Exam &nbsp;→</a>
+    </div>
+
+    <!-- NAME INPUT (shown when CTA clicked) -->
+    <div class="namebox hidden" id="nameSection">
+      <label for="candidateName">Enter your full name to appear on your certificate</label>
+      <input id="candidateName" type="text" autocomplete="name" placeholder="e.g. Jordan A. Rivera" maxlength="60" />
+      <p class="namehint" id="nameHint">Your name is only used to personalize your certificate.</p>
+      <button class="btn-begin" id="beginBtn">Begin the Basic Exam →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ SCREEN (hidden until exam starts) -->
+  <section id="quiz" class="hidden" aria-live="polite">
+    <div class="progress-shell">
+      <div class="progress-meta">
+        <span id="pmeta">Question 1 of 25</span>
+        <span class="timer" id="timer">45:00</span>
+      </div>
+      <div class="bar"><i id="pbar"></i></div>
+    </div>
+    <div id="qcontainer"></div>
+    <div class="nav">
+      <button class="btn-ghost" id="prevBtn">← Back</button>
+      <button class="btn-primary" id="nextBtn" disabled>Next →</button>
+    </div>
+  </section>
+
+  <!-- RESULT SCREEN (hidden until exam ends) -->
+  <section id="result" class="hidden" aria-live="polite">
+    <div class="result">
+      <div class="score-ring" id="ring">
+        <span class="pct" id="pct">0%</span>
+        <span class="frac" id="frac">0 / 25</span>
+      </div>
+      <div class="verdict" id="verdict">—</div>
+      <p id="verdictMsg"></p>
+      <div class="actions">
+        <button class="btn-gold hidden" id="certBtn">⬇ Download certificate (PDF)</button>
+        <button class="btn-ghost" id="reviewBtn">Review answers</button>
+        <button class="btn-ghost" id="retakeBtn">Retake exam</button>
+        <a class="btn-ghost" href="/intermediate" style="text-decoration:none;display:inline-flex;align-items:center">Intermediate Course →</a>
+      </div>
+    </div>
+    <div id="reviewContainer" class="hidden"></div>
+  </section>
+
+  <footer class="foot">
+    <div>Iron Condors Academy · Basic Course Certification</div>
+    <div class="footer-links"><a href="/">All Courses</a><a href="/intermediate">Intermediate</a><a href="/advanced">Advanced</a><a href="/verify.html">Verify a certificate</a></div>
+    <p style="margin:10px auto 0;max-width:720px;color:#8891A8;font-size:.72rem;line-height:1.45;text-transform:none;letter-spacing:normal">Educational content only. Options involve risk and are not suitable for every investor. Exam completion does not constitute investment advice or a professional license.</p>
+  </footer>
+
+</div><!-- .wrap -->
+
+<script src="config.js"></script>
+<script>
+const EXAM_KEY = 'basic';
+const EXAM_URL = 'iron-condors-basic-exam.json';
+const EXAM_BANK_FALLBACK = {"title":"Iron Condors — Basic Course Exam","course":"Iron Condors — Basic Course (1 of 3)","level":"Basic","certificateBody":"the Iron Condors Basic course, demonstrating a working command of options fundamentals, spread mechanics, and iron condor structure.","nextCourse":"Intermediate","version":"1.0","passingScore":0.7,"passingCorrect":18,"questionCount":25,"timeLimitMinutes":45,"shuffleQuestions":true,"shuffleOptions":false,"questions":[{"id":1,"topic":"Options basics","question":"A call option gives its holder the right to…","options":["Buy the stock at the strike price","Sell the stock at the strike price","Buy the stock only at expiration","Receive the stock's dividend"],"answerIndex":0,"answer":"A"},{"id":2,"topic":"Options basics","question":"A put option gives its holder the right to…","options":["Buy the stock at the strike price","Sell the stock at the strike price","Short the market index","Collect interest income"],"answerIndex":1,"answer":"B"},{"id":3,"topic":"Terminology","question":"An option's "premium" is best described as…","options":["The strike price","The price paid or received for the option","The maximum possible profit","The expiration date"],"answerIndex":1,"answer":"B"},{"id":4,"topic":"Terminology","question":"The strike price of an option is…","options":["The current market price of the stock","The price at which it can be exercised","The premium that was paid","The broker's commission"],"answerIndex":1,"answer":"B"},{"id":5,"topic":"Moneyness","question":"With the stock at $100, a $95 call is…","options":["Out of the money","At the money","In the money","Automatically expired"],"answerIndex":2,"answer":"C"},{"id":6,"topic":"Moneyness","question":"With the stock at $100, a $105 call is…","options":["In the money","At the money","Out of the money","Already assigned"],"answerIndex":2,"answer":"C"},{"id":7,"topic":"Moneyness","question":"An option whose strike equals the stock price is…","options":["In the money","At the money","Out of the money","Always worthless"],"answerIndex":1,"answer":"B"},{"id":8,"topic":"Moneyness","question":"A put option is in the money when…","options":["The stock is above the strike","The stock equals the strike","The stock is below the strike","It never happens"],"answerIndex":2,"answer":"C"},{"id":9,"topic":"Greeks","question":"Time decay of an option's value is measured by…","options":["Delta","Theta","Vega","Rho"],"answerIndex":1,"answer":"B"},{"id":10,"topic":"Buying vs selling","question":"Selling an option to open a position means you…","options":["Pay premium and gain a right","Collect premium and take on an obligation","Close an existing trade","Buy the stock outright"],"answerIndex":1,"answer":"B"},{"id":11,"topic":"Spreads","question":"A credit spread is opened for a…","options":["Net debit","Net credit","Zero net cost","Margin loan"],"answerIndex":1,"answer":"B"},{"id":12,"topic":"Spreads","question":"A credit spread reaches maximum profit when…","options":["The stock moves sharply","Implied volatility spikes","The options expire worthless","You exercise early"],"answerIndex":2,"answer":"C"},{"id":13,"topic":"Spreads","question":"A bull put spread profits when the stock…","options":["Stays above the short put strike","Falls below both puts","Pays a dividend","Gaps sharply lower"],"answerIndex":0,"answer":"A"},{"id":14,"topic":"Spreads","question":"A bear call spread profits when the stock…","options":["Rallies above both calls","Stays below the short call strike","Splits its shares","Rises sharply"],"answerIndex":1,"answer":"B"},{"id":15,"topic":"Iron condor structure","question":"An iron condor is constructed from…","options":["Two call spreads","Two put spreads","A bull put spread and a bear call spread","A single straddle"],"answerIndex":2,"answer":"C"},{"id":16,"topic":"Iron condor structure","question":"How many legs does an iron condor have?","options":["Two","Three","Four","Five"],"answerIndex":2,"answer":"C"},{"id":17,"topic":"Iron condor structure","question":"Listed from lowest to highest strike, the legs are…","options":["Buy put, sell put, sell call, buy call","Sell put, buy put, buy call, sell call","Buy call, sell call, sell put, buy put","Sell call, sell put, buy put, buy call"],"answerIndex":0,"answer":"A"},{"id":18,"topic":"Iron condor structure","question":"The two short (sold) strikes define…","options":["The range you want price to stay within","The maximum loss","The commission cost","The dividend yield"],"answerIndex":0,"answer":"A"},{"id":19,"topic":"Iron condor structure","question":"The two long (bought) strikes act as…","options":["Profit boosters","Protective wings that cap the loss","Dividend collectors","The short legs"],"answerIndex":1,"answer":"B"},{"id":20,"topic":"The math","question":"Maximum profit on an iron condor equals…","options":["Wing width × 100","The net credit received (× 100)","An unlimited amount","The strike price"],"answerIndex":1,"answer":"B"},{"id":21,"topic":"The math","question":"With $5 wings and a $1.20 credit, the max loss per contract is…","options":["$120","$380","$500","Unlimited"],"answerIndex":1,"answer":"B"},{"id":22,"topic":"The math","question":"With $5 wings and a $1.20 credit, the max profit per contract is…","options":["$120","$380","$500","$620"],"answerIndex":0,"answer":"A"},{"id":23,"topic":"The math","question":"Break-even prices are found by…","options":["Long strike ± wing width","Short strike ± net credit","Strike × 100","Premium ÷ 2"],"answerIndex":1,"answer":"B"},{"id":24,"topic":"When to trade","question":"An iron condor is ideal when you expect the stock to…","options":["Trend strongly higher","Sell off quickly","Stay range-bound","Pay a large dividend"],"answerIndex":2,"answer":"C"},{"id":25,"topic":"When to trade","question":"A good time to use an iron condor is when implied volatility is…","options":["Low and rising","High and expected to fall","Exactly zero","Not relevant"],"answerIndex":1,"answer":"B"}]};
+
+const APP_CONFIG = window.IRON_CONDORS_CONFIG || {};
+const SITE_BASE = APP_CONFIG.siteBase || new URL('.', location.href).href;
+const VERIFY_URL = new URL('verify.html', SITE_BASE).href;
+const RECORDS_ENDPOINT = APP_CONFIG.recordsEndpoint || '';
+
+let EXAM = null, order = [], current = 0, answers = [], timeLeft = 0, timerId = null;
+let candidateName = '', lastResult = null;
+
+function b64urlEncode(str){ return btoa(unescape(encodeURIComponent(str))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+function certChecksum(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)>>>0;} return h.toString(36).toUpperCase().padStart(7,'0').slice(-4); }
+function makeCertId(name,course,level,r,dateISO){ const payload=['v1',name,course,(level||''),r.pct,r.correct,r.total,dateISO].join('|'); const body=b64urlEncode(payload); return 'IC-'+(level||'GEN').toUpperCase().slice(0,3)+'-'+body+'-'+certChecksum(body); }
+
+async function loadExam(){
+  try{
+    const res = await fetch(EXAM_URL, {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    EXAM = await res.json();
+  }catch(e){ EXAM = EXAM_BANK_FALLBACK; }
+}
+
+function showNameSection(){
+  document.getElementById('showNameBtn').textContent = '✓ Exam selected — enter your name below';
+  document.getElementById('showNameBtn').style.opacity = '0.7';
+  document.getElementById('showNameBtn').style.cursor = 'default';
+  const ns = document.getElementById('nameSection');
+  ns.classList.remove('hidden');
+  ns.scrollIntoView({behavior:'smooth', block:'center'});
+  document.getElementById('candidateName').focus({preventScroll:true});
+}
+
+function startExam(){
+  const input = document.getElementById('candidateName');
+  const name = (input.value || '').trim().replace(/\s+/g,' ');
+  const hint = document.getElementById('nameHint');
+  if(name.length < 2){
+    input.classList.add('invalid'); hint.className='namehint err';
+    hint.textContent='Please enter your full name to start the exam.'; input.focus(); return;
+  }
+  input.classList.remove('invalid'); candidateName = name;
+  order = EXAM.questions.map((_,i)=>i);
+  if(EXAM.shuffleQuestions) shuffle(order);
+  answers = new Array(EXAM.questions.length).fill(null); current = 0;
+  document.getElementById('course-overview').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  startTimer(EXAM.timeLimitMinutes * 60);
+  renderQuestion();
+}
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function startTimer(secs){
+  timeLeft=secs; updateTimer(); clearInterval(timerId);
+  timerId=setInterval(()=>{ timeLeft--; updateTimer(); if(timeLeft<=0){clearInterval(timerId);finishExam();} },1000);
+}
+function updateTimer(){
+  const m=Math.floor(timeLeft/60),s=timeLeft%60;
+  const t=document.getElementById('timer');
+  t.textContent=m+':'+String(s).padStart(2,'0');
+  t.style.color=timeLeft<=60?'var(--rose)':'var(--mute)';
+}
+
+function renderQuestion(){
+  const qi=order[current], q=EXAM.questions[qi], total=EXAM.questions.length;
+  document.getElementById('pmeta').textContent=`Question ${current+1} of ${total}`;
+  document.getElementById('pbar').style.width=((current+1)/total)*100+'%';
+  const letters=['A','B','C','D','E','F'];
+  const c=document.createElement('div'); c.className='card';
+  c.innerHTML=`<div><span class="qnum">Q${current+1}</span><span class="qtopic">${q.topic||''}</span></div>
+    <div class="qtext">${q.question}</div>
+    <div class="opts">${q.options.map((o,i)=>`
+      <label class="opt${answers[qi]===i?' selected':''}" data-i="${i}">
+        <span class="letter">${letters[i]}</span><span>${o}</span>
+        <input type="radio" name="q" value="${i}" ${answers[qi]===i?'checked':''}/>
+      </label>`).join('')}</div>`;
+  const box=document.getElementById('qcontainer'); box.innerHTML=''; box.appendChild(c);
+  c.querySelectorAll('.opt').forEach(el=>{
+    el.addEventListener('click',()=>{
+      answers[qi]=parseInt(el.dataset.i,10);
+      c.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+      el.classList.add('selected'); el.querySelector('input').checked=true;
+      document.getElementById('nextBtn').disabled=false;
+    });
+  });
+  document.getElementById('prevBtn').disabled=current===0;
+  document.getElementById('nextBtn').disabled=answers[qi]===null;
+  document.getElementById('nextBtn').textContent=current===total-1?'Submit exam ✓':'Next →';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function next(){ if(current===EXAM.questions.length-1){finishExam();return;} current++; renderQuestion(); }
+function prev(){ if(current>0){current--;renderQuestion();} }
+
+function finishExam(){
+  clearInterval(timerId);
+  let correct=0;
+  EXAM.questions.forEach((q,i)=>{ if(answers[i]===q.answerIndex) correct++; });
+  const total=EXAM.questions.length, pct=Math.round(correct/total*100);
+  const passed=correct>=(EXAM.passingCorrect||Math.ceil(total*EXAM.passingScore));
+  const dateISO=new Date().toISOString().slice(0,10);
+  lastResult={correct,total,pct,passed,dateISO,certId:null};
+  if(passed){ lastResult.certId=makeCertId(candidateName,EXAM.course||'Iron Condors Course',EXAM.level||'',lastResult,dateISO); recordPass(); }
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('result').classList.remove('hidden');
+  document.getElementById('pct').textContent=pct+'%';
+  document.getElementById('frac').textContent=correct+' / '+total;
+  const ring=document.getElementById('ring');
+  ring.style.background=passed?`conic-gradient(var(--green) ${pct}%,var(--greenx) ${pct}%)`:`conic-gradient(var(--rose) ${pct}%,var(--rosex) ${pct}%)`;
+  ring.style.boxShadow='inset 0 0 0 12px #fff,0 0 0 3px #fff,0 0 0 5px var(--goldl),0 10px 28px rgba(15,26,42,.18)';
+  const v=document.getElementById('verdict');
+  v.textContent=passed?'Passed 🎉':'Not yet — keep going'; v.className='verdict '+(passed?'pass':'fail');
+  const passNeeded=EXAM.passingCorrect||Math.ceil(total*(EXAM.passingScore||0.7));
+  const passPct=Math.round((EXAM.passingScore||0.7)*100);
+  document.getElementById('verdictMsg').textContent=passed
+    ?(EXAM.nextCourse?'Congratulations! You earned your Basic Certificate. Continue to the Intermediate course.':'Congratulations! You earned your Certificate of Completion.')
+    :'You need '+passNeeded+' of '+total+' ('+passPct+'%) to pass. Review your answers and retake when ready.';
+  document.getElementById('certBtn').classList.toggle('hidden',!passed);
+  buildReview(); window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buildReview(){
+  const letters=['A','B','C','D','E','F'];
+  document.getElementById('reviewContainer').innerHTML=order.map((qi,di)=>{
+    const q=EXAM.questions[qi],chosen=answers[qi];
+    return `<div class="card"><div><span class="qnum">Q${di+1}</span><span class="qtopic">${q.topic||''}</span></div>
+      <div class="qtext">${q.question}</div>
+      <div class="opts">${q.options.map((o,j)=>{
+        let cls='opt'; let tag='';
+        if(j===q.answerIndex){cls+=' correct';tag='<span class="tag ok">Correct</span>';}
+        else if(j===chosen){cls+=' wrong';tag='<span class="tag no">Your answer</span>';}
+        return `<div class="${cls}"><span class="letter">${letters[j]}</span><span>${o}</span>${tag}</div>`;
+      }).join('')}</div></div>`;
+  }).join('');
+}
+
+function recordPass(){
+  const r=lastResult||{};
+  const record={event:'exam_pass',name:candidateName,course:EXAM.course||'',level:EXAM.level||'',examKey:EXAM_KEY,score:r.pct,correct:r.correct,total:r.total,date:r.dateISO,certId:r.certId,verifyUrl:VERIFY_URL+'?id='+encodeURIComponent(r.certId||''),userAgent:navigator.userAgent};
+  if(!RECORDS_ENDPOINT){console.info('[records] pass recorded:',record);return;}
+  try{fetch(RECORDS_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(record)}).catch(e=>console.warn('[records] POST failed:',e));}catch(e){console.warn('[records] POST threw:',e);}
+}
+
+// PDF Certificate (full implementation from original)
+function rgb(hex){const n=parseInt(hex,16);return((n>>16&255)/255).toFixed(3)+' '+((n>>8&255)/255).toFixed(3)+' '+((n&255)/255).toFixed(3);}
+function esc(s){return String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');}
+const WINANSI={0x2014:0x97,0x2013:0x96,0x2018:0x91,0x2019:0x92,0x201C:0x93,0x201D:0x94,0x2026:0x85,0x2022:0x95,0x2122:0x99,0x20AC:0x80};
+function enc(s){let o='';for(const ch of String(s)){const cp=ch.charCodeAt(0);if(cp<256)o+=ch;else if(WINANSI[cp]!==undefined)o+=String.fromCharCode(WINANSI[cp]);else o+='-';}return o;}
+const _mc=document.createElement('canvas').getContext('2d');
+function textWidth(str,size,bold){_mc.font=(bold?'bold ':'')+size+'px Georgia, "Times New Roman", Times, serif';return _mc.measureText(str).width;}
+function opCenter(str,cx,y,size,bold,colorHex){const w=textWidth(str,size,bold);return colorText(esc(enc(str)),cx-w/2,y,size,bold,colorHex);}
+function colorText(safe,x,y,size,bold,colorHex){return(colorHex?rgb(colorHex)+' rg\n':'')+'BT /'+(bold?'F2':'F1')+' '+size+' Tf '+x.toFixed(2)+' '+y.toFixed(2)+' Td ('+safe+') Tj ET\n';}
+function rectFill(x,y,w,h,colorHex){return rgb(colorHex)+' rg '+x+' '+y+' '+w+' '+h+' re f\n';}
+function rectStroke(x,y,w,h,colorHex,lw){return rgb(colorHex)+' RG '+(lw||1)+' w '+x+' '+y+' '+w+' '+h+' re S\n';}
+function buildCertificateStream(){
+  const W=792,H=612,cx=W/2;
+  const teal='0F2A6A',amber='B8923E',ink='0F172A',green='0D7A4C',line='E2E8F0',slate='334155',mute='64748B';
+  let s='';
+  s+=rectFill(0,0,W,H,'FFFCF3');s+=rectFill(0,H-14,W,14,teal);s+=rectFill(0,0,W,14,teal);
+  s+=rectStroke(26,26,W-52,H-52,amber,1.5);s+=rectStroke(32,32,W-64,H-64,teal,0.75);
+  s+=opCenter('IRON CONDORS ACADEMY',cx,H-58,13,false,amber);
+  s+=opCenter('Certificate of Completion',cx,H-100,28,true,teal);
+  s+=opCenter('This certifies that',cx,H-148,12,false,mute);
+  s+=opCenter(candidateName,cx,H-188,26,true,ink);
+  s+=rectFill(cx-120,H-200,240,1.5,amber);
+  s+=opCenter('has successfully completed',cx,H-222,12,false,mute);
+  const cb=EXAM.certificateBody||'the Iron Condors certification course.';
+  s+=opCenter(cb,cx,H-256,12,false,slate);
+  s+=opCenter('Exam Score: '+lastResult.pct+'% · '+(lastResult.correct)+' of '+lastResult.total+' correct',cx,H-290,11,false,slate);
+  s+=opCenter('Date: '+lastResult.dateISO,cx,H-318,11,false,mute);
+  s+=rectFill(cx-120,H-340,240,1,line);
+  s+=opCenter('Certificate ID',cx-80,H-368,9,false,mute);
+  s+=opCenter(lastResult.certId||'',cx-80,H-384,9,false,slate);
+  s+=opCenter('Verify at: '+VERIFY_URL,cx+60,H-376,8,false,mute);
+  return s;
+}
+function makePDF(stream){
+  const fonts='<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding /WinAnsiEncoding >>';
+  const fontB='<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold /Encoding /WinAnsiEncoding >>';
+  const resources='<< /Font << /F1 2 0 R /F2 3 0 R >> >>';
+  const content=stream;
+  const objs=[''];
+  objs.push('<< /Type /Catalog /Pages 4 0 R >>');
+  objs.push(fonts);objs.push(fontB);
+  const cLen=content.length;
+  objs.push('<< /Type /Pages /Kids [5 0 R] /Count 1 >>');
+  objs.push('<< /Type /Page /Parent 4 0 R /MediaBox [0 0 792 612] /Contents 6 0 R /Resources '+resources+' >>');
+  objs.push('<< /Length '+cLen+' >>\nstream\n'+content+'\nendstream');
+  let pdf='%PDF-1.4\n';
+  const offsets=new Array(objs.length).fill(0);
+  for(let i=1;i<objs.length;i++){offsets[i]=pdf.length;pdf+=i+' 0 obj\n'+objs[i]+'\nendobj\n';}
+  const xrefPos=pdf.length;const count=objs.length;
+  pdf+='xref\n0 '+count+'\n0000000000 65535 f \n';
+  for(let i=1;i<count;i++)pdf+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+  pdf+='trailer\n<< /Size '+count+' /Root 1 0 R >>\nstartxref\n'+xrefPos+'\n%%EOF';
+  return pdf;
+}
+function downloadCertificate(){
+  if(!lastResult||!lastResult.passed)return;
+  const pdf=makePDF(buildCertificateStream());
+  const bytes=new Uint8Array(pdf.length);
+  for(let i=0;i<pdf.length;i++)bytes[i]=pdf.charCodeAt(i)&0xff;
+  const blob=new Blob([bytes],{type:'application/pdf'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;
+  a.download='Iron-Condors-Basic-Certificate-'+candidateName.replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/,'')+'.pdf';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+}
+
+// Wire up events
+document.getElementById('showNameBtn').addEventListener('click',e=>{e.preventDefault();showNameSection();});
+document.getElementById('candidateName').addEventListener('keydown',e=>{if(e.key==='Enter')startExam();});
+document.getElementById('beginBtn').addEventListener('click',startExam);
+document.getElementById('certBtn').addEventListener('click',downloadCertificate);
+document.getElementById('nextBtn').addEventListener('click',next);
+document.getElementById('prevBtn').addEventListener('click',prev);
+document.getElementById('retakeBtn').addEventListener('click',()=>{
+  document.getElementById('result').classList.add('hidden');
+  document.getElementById('course-overview').classList.remove('hidden');
+  document.getElementById('reviewContainer').innerHTML='';
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+document.getElementById('reviewBtn').addEventListener('click',()=>{
+  const rc=document.getElementById('reviewContainer');
+  rc.classList.toggle('hidden');
+  document.getElementById('reviewBtn').textContent=rc.classList.contains('hidden')?'Review answers':'Hide review';
+  if(!rc.classList.contains('hidden'))rc.scrollIntoView({behavior:'smooth'});
+});
+window.addEventListener('beforeunload',e=>{
+  if(!document.getElementById('quiz').classList.contains('hidden')){e.preventDefault();e.returnValue='';}
+});
+
+loadExam();
+</script>
+</body>
+</html>
